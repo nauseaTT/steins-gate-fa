@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steins;Gate Persian Project — Phase 1/10 | داشبورد مدیریت پروژه ترجمه فارسی</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&family=Share+Tech+Mono&display=swap">
+<style>
+:root{
+  --bg:#070b14; --bg2:#0b1120; --panel:#0e1628; --panel2:#111c33;
+  --border:#1c2b4a; --neon:#00d9ff; --neon2:#00ffa3; --purple:#a855f7;
+  --amber:#ffb020; --red:#ff4d6d; --green:#22c55e; --yellow:#eab308;
+  --text:#dbe7ff; --muted:#7d90b5; --glow:0 0 18px rgba(0,217,255,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Vazirmatn',Tahoma,sans-serif;background:var(--bg);color:var(--text);
+  background-image:
+    radial-gradient(circle at 15% 10%,rgba(0,217,255,.07),transparent 40%),
+    radial-gradient(circle at 85% 90%,rgba(168,85,247,.08),transparent 40%),
+    repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,217,255,.012) 3px,rgba(0,217,255,.012) 4px);
+  min-height:100vh;line-height:1.9;
+}
+::-webkit-scrollbar{width:10px}::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--neon),var(--purple));border-radius:8px}
+::selection{background:var(--neon);color:#000}
+a{color:var(--neon);text-decoration:none;transition:.2s}
+a:hover{color:var(--neon2);text-shadow:0 0 8px rgba(0,255,163,.6)}
+.mono{font-family:'Share Tech Mono',monospace;direction:ltr;display:inline-block}
+/* ===== Header ===== */
+header{
+  position:sticky;top:0;z-index:100;backdrop-filter:blur(14px);
+  background:rgba(7,11,20,.85);border-bottom:1px solid var(--border);
+  padding:14px 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{
+  width:46px;height:46px;border-radius:10px;display:grid;place-items:center;
+  background:linear-gradient(135deg,#001a26,#0a2a3d);border:1px solid var(--neon);
+  box-shadow:var(--glow);font-size:20px;color:var(--neon);
+}
+.logo h1{font-size:1.05rem;font-weight:900;background:linear-gradient(90deg,var(--neon),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo small{color:var(--muted);font-size:.72rem;display:block;font-weight:400}
+.phase-badge{
+  font-family:'Share Tech Mono',monospace;background:rgba(0,217,255,.1);border:1px solid var(--neon);
+  color:var(--neon);padding:4px 14px;border-radius:20px;font-size:.8rem;box-shadow:var(--glow);
+}
+.searchbox{flex:1;min-width:220px;max-width:460px;position:relative;margin-inline-start:auto}
+.searchbox input{
+  width:100%;padding:10px 42px 10px 14px;border-radius:10px;border:1px solid var(--border);
+  background:var(--panel);color:var(--text);font-family:inherit;font-size:.9rem;outline:none;transition:.25s;
+}
+.searchbox input:focus{border-color:var(--neon);box-shadow:var(--glow)}
+.searchbox i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted)}
+/* ===== Progress ===== */
+.progress-wrap{max-width:1200px;margin:26px auto 0;padding:0 20px}
+.progress-card{
+  background:linear-gradient(135deg,var(--panel),var(--panel2));border:1px solid var(--border);
+  border-radius:16px;padding:18px 22px;box-shadow:0 8px 30px rgba(0,0,0,.5);
+}
+.progress-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.progress-top b{color:var(--neon)}
+.progress-bar{height:16px;background:#0a0f1e;border:1px solid var(--border);border-radius:20px;overflow:hidden;position:relative}
+.progress-fill{
+  height:100%;width:10%;border-radius:20px;
+  background:linear-gradient(90deg,var(--neon),var(--neon2));
+  box-shadow:0 0 16px rgba(0,217,255,.7);position:relative;
+  animation:pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.35)}}
+.progress-fill::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 12px,rgba(255,255,255,.14) 12px 24px);animation:stripes 1.2s linear infinite}
+@keyframes stripes{to{transform:translateX(24px)}}
+/* ===== Layout ===== */
+main{max-width:1200px;margin:26px auto 60px;padding:0 20px}
+/* ===== Accordion ===== */
+.acc{margin-bottom:22px;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--panel);box-shadow:0 8px 28px rgba(0,0,0,.45)}
+.acc-head{
+  cursor:pointer;padding:18px 22px;display:flex;align-items:center;gap:14px;
+  background:linear-gradient(135deg,var(--panel2),var(--panel));user-select:none;transition:.25s;position:relative;
+}
+.acc-head:hover{background:linear-gradient(135deg,#14223f,var(--panel2))}
+.acc-head .num{
+  font-family:'Share Tech Mono',monospace;font-size:.75rem;color:#001018;background:var(--neon);
+  padding:3px 10px;border-radius:6px;font-weight:700;box-shadow:var(--glow);
+}
+.acc-head h2{font-size:1.08rem;font-weight:700;flex:1}
+.acc-head h2 span{color:var(--muted);font-weight:400;font-size:.8rem;display:block}
+.acc-head .chev{color:var(--neon);transition:transform .35s;font-size:1.1rem}
+.acc.open .acc-head .chev{transform:rotate(180deg)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .5s ease}
+.acc.open .acc-body{max-height:20000px}
+.acc-inner{padding:22px;border-top:1px dashed var(--border)}
+.acc-inner h3{color:var(--neon);margin:26px 0 12px;font-size:1rem;display:flex;align-items:center;gap:8px}
+.acc-inner h3:first-child{margin-top:0}
+.acc-inner p{margin-bottom:12px;color:var(--text);font-size:.92rem}
+.acc-inner ul,.acc-inner ol{padding-inline-start:22px;margin-bottom:14px}
+.acc-inner li{margin-bottom:7px;font-size:.9rem}
+mark{background:var(--amber);color:#000;border-radius:3px;padding:0 3px}
+.hidden-by-search{display:none!important}
+/* ===== Tables ===== */
+.tbl-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border);margin:12px 0 18px}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:640px}
+thead th{
+  background:linear-gradient(135deg,#0d1f3c,#101a30);color:var(--neon);padding:12px 14px;
+  text-align:right;font-weight:700;border-bottom:2px solid var(--neon);white-space:nowrap;
+}
+tbody td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+tbody tr:hover{background:rgba(0,217,255,.05)}
+tbody tr:nth-child(even){background:rgba(255,255,255,.015)}
+/* ===== Badges ===== */
+.badge{display:inline-flex;align-items:center;gap:6px;padding:3px 12px;border-radius:20px;font-size:.75rem;font-weight:700;white-space:nowrap}
+.badge i{font-size:.65rem}
+.b-easy{background:rgba(34,197,94,.14);color:var(--green);border:1px solid var(--green)}
+.b-med{background:rgba(234,179,8,.14);color:var(--yellow);border:1px solid var(--yellow)}
+.b-hard{background:rgba(255,77,109,.14);color:var(--red);border:1px solid var(--red)}
+.b-info{background:rgba(0,217,255,.12);color:var(--neon);border:1px solid var(--neon)}
+.b-purple{background:rgba(168,85,247,.14);color:#c99aff;border:1px solid var(--purple)}
+/* ===== Info boxes ===== */
+.note,.warn,.danger,.tip{border-radius:12px;padding:14px 18px;margin:14px 0;font-size:.88rem;border:1px solid;display:flex;gap:12px}
+.note{background:rgba(0,217,255,.07);border-color:rgba(0,217,255,.4)}
+.warn{background:rgba(255,176,32,.07);border-color:rgba(255,176,32,.45)}
+.danger{background:rgba(255,77,109,.07);border-color:rgba(255,77,109,.45)}
+.tip{background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.45)}
+.note i{color:var(--neon)}.warn i{color:var(--amber)}.danger i{color:var(--red)}.tip i{color:var(--green)}
+.note i,.warn i,.danger i,.tip i{margin-top:5px}
+/* ===== Code ===== */
+pre{
+  background:#05080f;border:1px solid var(--border);border-radius:10px;padding:14px 18px;
+  font-family:'Share Tech Mono',monospace;font-size:.8rem;direction:ltr;text-align:left;
+  overflow-x:auto;color:#9fe8ff;margin:12px 0;line-height:1.7;
+}
+pre .c{color:#5a7396}pre .k{color:var(--neon2)}pre .s{color:#ffd479}
+code.inl{font-family:'Share Tech Mono',monospace;background:rgba(0,217,255,.1);border:1px solid rgba(0,217,255,.25);padding:1px 7px;border-radius:6px;font-size:.8rem;direction:ltr;display:inline-block;color:#9fe8ff}
+/* ===== File tree ===== */
+.tree{
+  background:#05080f;border:1px solid var(--border);border-radius:10px;padding:16px 20px;
+  font-family:'Share Tech Mono',monospace;font-size:.8rem;direction:ltr;text-align:left;
+  overflow-x:auto;color:#c7d8f5;margin:12px 0;line-height:1.9;white-space:pre;
+}
+.tree .dir{color:var(--neon)}.tree .hot{color:var(--amber);font-weight:700}.tree .cmt{color:#5a7396}
+/* ===== Steps (install) ===== */
+.steps{counter-reset:st;margin:14px 0}
+.step{
+  position:relative;padding:16px 20px 16px 20px;margin-bottom:14px;border:1px solid var(--border);
+  border-radius:12px;background:var(--panel2);padding-inline-start:64px;
+}
+.step::before{
+  counter-increment:st;content:counter(st);position:absolute;inset-inline-start:16px;top:16px;
+  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--neon),var(--purple));color:#001018;font-weight:900;font-family:'Share Tech Mono',monospace;
+  box-shadow:var(--glow);
+}
+.step h4{color:var(--neon);margin-bottom:6px;font-size:.95rem}
+.step p{font-size:.86rem;margin-bottom:6px}
+.shot{
+  border:1px dashed var(--neon);border-radius:10px;padding:10px;margin-top:10px;background:#05080f;
+  font-family:'Share Tech Mono',monospace;font-size:.75rem;direction:ltr;text-align:center;color:#7fd8f0;line-height:1.8;
+}
+.shot .bar{background:#0d1f3c;border-radius:6px;padding:4px 10px;margin-bottom:8px;color:var(--neon);font-weight:700}
+.shot .btn{display:inline-block;border:1px solid var(--neon2);color:var(--neon2);border-radius:5px;padding:1px 14px;margin-top:8px}
+.shot .hl{background:rgba(0,217,255,.18);padding:0 6px;border-radius:4px}
+/* ===== Checklist ===== */
+.check{list-style:none;padding:0!important}
+.check li{display:flex;gap:10px;align-items:flex-start;padding:8px 12px;border:1px solid var(--border);border-radius:9px;margin-bottom:8px;background:var(--panel2);font-size:.86rem}
+.check li i{color:var(--green);margin-top:5px}
+/* ===== Tool cards ===== */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin:12px 0 18px}
+.card{
+  border:1px solid var(--border);border-radius:12px;padding:16px;background:var(--panel2);transition:.25s;position:relative;overflow:hidden;
+}
+.card:hover{border-color:var(--neon);box-shadow:var(--glow);transform:translateY(-3px)}
+.card h4{color:var(--neon);font-size:.92rem;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.card p{font-size:.8rem;color:var(--muted);margin-bottom:10px}
+.card .dl{font-size:.78rem;font-weight:700}
+.card .dl i{margin-inline-end:5px}
+/* ===== Fake input fields ===== */
+.fake-form{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:18px;margin:14px 0}
+.fake-form label{display:block;font-size:.82rem;color:var(--muted);margin:10px 0 5px}
+.fake-form .row{display:flex;gap:10px;flex-wrap:wrap}
+.fake-form input{
+  flex:1;min-width:200px;padding:10px 14px;border-radius:9px;border:1px solid var(--border);
+  background:#05080f;color:var(--text);font-family:inherit;font-size:.85rem;outline:none;
+}
+.fake-form input:focus{border-color:var(--neon);box-shadow:var(--glow)}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:9px;cursor:pointer;
+  border:1px solid var(--neon);background:rgba(0,217,255,.1);color:var(--neon);
+  font-family:inherit;font-weight:700;font-size:.85rem;transition:.25s;
+}
+.btn:hover{background:var(--neon);color:#001018;box-shadow:var(--glow)}
+.btn.big{font-size:1rem;padding:14px 34px}
+/* ===== Countdown ===== */
+.countdown{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:18px 0}
+.cd-box{
+  min-width:96px;text-align:center;padding:16px 10px;border-radius:14px;
+  background:linear-gradient(160deg,#0d1f3c,#0a0f1e);border:1px solid var(--neon);box-shadow:var(--glow);
+}
+.cd-box .v{font-family:'Share Tech Mono',monospace;font-size:2.1rem;font-weight:700;color:var(--neon);text-shadow:0 0 14px rgba(0,217,255,.8)}
+.cd-box .l{font-size:.75rem;color:var(--muted);margin-top:4px}
+/* ===== Footer ===== */
+footer{border-top:1px solid var(--border);padding:30px 20px 46px;text-align:center;background:var(--bg2)}
+footer .pdf-row{margin:16px 0 22px}
+footer small{color:var(--muted);font-size:.75rem;display:block;margin-top:16px}
+#toTop{
+  position:fixed;bottom:24px;inset-inline-start:24px;width:46px;height:46px;border-radius:50%;
+  border:1px solid var(--neon);background:rgba(7,11,20,.9);color:var(--neon);cursor:pointer;
+  display:none;place-items:center;box-shadow:var(--glow);z-index:99;font-size:1rem;
+}
+#toTop.show{display:grid}
+@media(max-width:640px){
+  .logo h1{font-size:.9rem}
+  .acc-head h2{font-size:.92rem}
+  .cd-box{min-width:72px}.cd-box .v{font-size:1.5rem}
+  main{padding:0 12px}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="logo">
+    <div class="logo-icon"><i class="fa-solid fa-satellite-dish"></i></div>
+    <div>
+      <h1>STEINS;GATE — Persian Localization Project</h1>
+      <small>داشبورد مهندسی ترجمه فارسی | موتور MAGES. / MagesEngine</small>
+    </div>
+  </div>
+  <span class="phase-badge">PHASE 1 / 10</span>
+  <div class="searchbox">
+    <input type="text" id="searchInput" placeholder="جستجو در مستندات... (مثلاً: MPAK، فونت، D-Mail)">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </div>
+</header>
+
+<!-- ================= PROGRESS ================= -->
+<div class="progress-wrap searchable">
+  <div class="progress-card">
+    <div class="progress-top">
+      <span><i class="fa-solid fa-chart-line" style="color:var(--neon)"></i> <b>پیشرفت کلی پروژه:</b> مرحله ۱ (برنامه‌ریزی و آنالیز) در حال تکمیل است</span>
+      <span class="mono" style="color:var(--neon);font-size:1.05rem">10.0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+    <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:.72rem;color:var(--muted)">
+      <span>شروع: مرحله ۱ — Project Setup</span>
+      <span class="mono">EL PSY KONGROO // Divergence 1.048596%</span>
+      <span>پایان: مرحله ۱۰ — Release v1.0</span>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ============================================================
+     SECTION 1 : PROJECT OVERVIEW
+============================================================ -->
+<section class="acc open searchable" id="sec1">
+  <div class="acc-head">
+    <span class="num">SEC-01</span>
+    <h2>نمای کلی پروژه <span>Project Overview — جدول زمانی، سختی مراحل، ابزارها و پیش‌نیازها</span></h2>
+    <i class="fa-solid fa-chevron-down chev"></i>
+  </div>
+  <div class="acc-body"><div class="acc-inner">
+
+    <h3><i class="fa-solid fa-circle-info"></i> این پروژه چیست؟</h3>
+    <p>
+      هدف این پروژه، <b>ترجمهٔ کامل و مهندسی‌شدهٔ بازی Steins;Gate (نسخهٔ PC/Steam)</b> به زبان فارسی است. Steins;Gate یک رمان تصویری (Visual Novel) ساخت استودیوی <b>MAGES.</b> (سابقاً 5pb./Nitroplus) است که روی موتور اختصاصی <b>MAGES. Engine</b> (معروف به <span class="mono">MagesEngine</span>) اجرا می‌شود. این موتور با موتورهایی مثل KiriKiri (فایل‌های <span class="mono">.xp3</span>) تفاوت اساسی دارد و ساختار آرشیو خاص خودش — یعنی فرمت <span class="mono">MPK/MPAK</span> — را به‌کار می‌برد. در این مرحله (فاز ۱ از ۱۰) فقط <b>برنامه‌ریزی، آنالیز و آماده‌سازی محیط</b> انجام می‌شود؛ هیچ فایلی از بازی هنوز دست‌کاری نمی‌شود.
+    </p>
+    <div class="note"><i class="fa-solid fa-lightbulb"></i><div>
+      <b>نکتهٔ مهم برای تازه‌کارها:</b> «مهندسی معکوس» (Reverse Engineering) یعنی ما بدون داشتن سورس‌کد بازی، فایل‌های آن را باز می‌کنیم، ساختارشان را می‌فهمیم و ابزارهایی می‌سازیم تا متن‌ها را بیرون بکشیم، ترجمه کنیم و دوباره به داخل بازی برگردانیم. دقیقاً کاری که گروه Committee of Zero برای پچ انگلیسی STEINS;GATE 0 و CHAOS;HEAD انجام داد.
+    </div></div>
+
+    <h3><i class="fa-solid fa-calendar-days"></i> جدول زمانی و سطح سختی ۱۰ مرحله</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr>
+        <th>مرحله</th><th>عنوان</th><th>زمان تخمینی</th><th>سطح سختی</th><th>وضعیت</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="mono">01</td><td>برنامه‌ریزی، تهیه بازی و آنالیز ساختار فایل‌ها (همین سند)</td><td>۳ تا ۵ روز</td><td><span class="badge b-easy"><i class="fa-solid fa-circle"></i>آسان</span></td><td><span class="badge b-info"><i class="fa-solid fa-spinner"></i>در حال انجام</span></td></tr>
+        <tr><td class="mono">02</td><td>استخراج اسکریپت‌ها و متون خام از آرشیوهای MPK</td><td>۵ تا ۷ روز</td><td><span class="badge b-med"><i class="fa-solid fa-circle"></i>متوسط</span></td><td><span class="badge b-purple">در انتظار</span></td></tr>
+        <tr><td class="mono">03</td><td>ساخت Pipeline تبدیل متن (Script Parser + ابزار Export/Import)</td><td>۱ تا ۲ هفته</td><td><span class="badge b-hard"><i class="fa-solid fa-circle"></i>سخت</span></td><td><span class="badge b-purple">در انتظار</span></td></tr>
+        <tr><td class="mono">04</td><td>راه‌اندازی پلتفرم ترجمه (Weblate / Google Sheets) + استخراج واژه‌نامه</td><td>۳ تا ۴ روز</td><td><span class="badge b-easy"><i class="fa-solid fa-circle"></i>آسان</span></td><td><span class="badge b-purple">در انتظار</span></td></tr>
+        <tr><td class="mono">05</td><td>ترجمهٔ اصلی (~۱.۱ میلیون کلمهٔ ژاپنی → فارسی)</td><td>۳ تا ۶ ماه (تیمی)</td><td><span class="badge b-hard"><i class="fa-solid fa-circle"></i>سخت</span></td><td><span class="badge b-purple">در انتظار</span></td></tr>
+        <tr><td class="mono">06</td><td>مهندسی فونت فارسی، RTL و بازطراحی جعبهٔ متن</td><td>۲ تا ۳ هفته</td><td><span class="badge b-hard"><i class="fa-solid fa-circle"></i>سخت</span></td><td><span class="badge b-purple">در انتظار</span></td></tr>
+        <tr><td class="mono">07</td><td>بازگردانی (Repack) متون به فرمت SCX/MPK و تست اجرای بازی</td><td>۱ هفته</td><td><span class="badge b-med"><i class="fa-solid fa-circle"></i>متوسط</span></td><td><span class="badge b-purple">در انتظار</span></td></tr>
+        <tr><td class="mono">08</td><td>ترجمهٔ تصاویر UI، منوها، گلوسری TIPs و زیرنویس ویدیوها</td><td>۲ هفته</td><td><span class="badge b-med"><i class="fa-solid fa-circle"></i>متوسط</span></td><td><span class="badge b-purple">در انتظار</span></td></tr>
+        <tr><td class="mono">09</td><td>تست کامل QA روی هر ۶ پایان (Ending) + رفع باگ‌های رشته متن</td><td>۳ تا ۴ هفته</td><td><span class="badge b-med"><i class="fa-solid fa-circle"></i>متوسط</span></td><td><span class="badge b-purple">در انتظار</span></td></tr>
+        <tr><td class="mono">10</td><td>بسته‌بندی پچ نصب‌شونده، مستندسازی و انتشار عمومی</td><td>۱ هفته</td><td><span class="badge b-easy"><i class="fa-solid fa-circle"></i>آسان</span></td><td><span class="badge b-purple">در انتظار</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="warn"><i class="fa-solid fa-triangle-exclamation"></i><div>
+      <b>برآورد واقع‌بینانه:</b> با یک تیم ۳ تا ۵ نفره، کل پروژه حدود <b>۶ تا ۹ ماه</b> طول می‌کشد. بیشترین زمان صرف «ترجمهٔ اصلی» (مرحلهٔ ۵) می‌شود چون Steins;Gate یکی از طولانی‌ترین رمان‌های تصویری تاریخ است (بیش از ۳۰ تا ۵۰ ساعت گیم‌پلی، حدود ۵۰هزار خط دیالوگ).
+    </div></div>
+
+    <h3><i class="fa-solid fa-toolbox"></i> ابزارهای مورد نیاز کل پروژه (با لینک دانلود مستقیم)</h3>
+    <div class="grid">
+      <div class="card"><h4><i class="fa-solid fa-box-open"></i> GARbro</h4>
+        <p>استخراج‌کنندهٔ چندمنظورهٔ آرشیو رمان‌های تصویری. پشتیبانی از بیش از ۲۰۰۰ فرمت شامل XP3 و برخی آرشیوهای MAGES. نسخه‌های قدیمی‌تر. رابط گرافیکی ساده.</p>
+        <a class="dl" href="https://github.com/morkt/GARbro/releases" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i>github.com/morkt/GARbro/releases</a></div>
+      <div class="card"><h4><i class="fa-solid fa-flask"></i> SciADV / MagesTools</h4>
+        <p>مجموعه ابزار تخصصی Committee of Zero برای بازی‌های Science Adventure (از جمله MagesTool برای آرشیوهای MPK و mages-script-tools برای اسکریپت‌های SCX). ابزار اصلی ما.</p>
+        <a class="dl" href="https://github.com/CommitteeOfZero" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i>github.com/CommitteeOfZero</a></div>
+      <div class="card"><h4><i class="fa-solid fa-dragon"></i> KrkrExtract</h4>
+        <p>استخراج‌کنندهٔ اختصاصی آرشیوهای KiriKiri (.xp3) — در صورت کار روی نسخه‌های قدیمی یا فان‌دیسک‌های مبتنی بر KiriKiri کاربرد دارد.</p>
+        <a class="dl" href="https://github.com/xmoezzz/KrkrExtract/releases" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i>github.com/xmoezzz/KrkrExtract</a></div>
+      <div class="card"><h4><i class="fa-solid fa-brands fa-python"></i> Python 3.11+</h4>
+        <p>زبان اصلی نوشتن اسکریپت‌های Parser و Pipeline ترجمه. همراه با کتابخانه‌های struct، pathlib و charset-normalizer.</p>
+        <a class="dl" href="https://www.python.org/downloads/" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i>python.org/downloads</a></div>
+      <div class="card"><h4><i class="fa-solid fa-file-binary"></i> 010 Editor / HxD</h4>
+        <p>ویرایشگر هگز (Hex Editor) برای بررسی ساختار باینری فایل‌های MPK و SCX. 010 Editor نسخهٔ تجاری با قابلیت Binary Template است؛ HxD رایگان است.</p>
+        <a class="dl" href="https://www.sweetscape.com/010editor/" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i>sweetscape.com/010editor</a>
+        &nbsp;|&nbsp;
+        <a class="dl" href="https://mh-nexus.de/en/hxd/" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i>mh-nexus.de/hxd</a></div>
+      <div class="card"><h4><i class="fa-solid fa-font"></i> FontForge</h4>
+        <p>ویرایشگر فونت متن‌باز برای ساخت نسخهٔ سفارشی فونت با گلیف‌های فارسی و اتصال به جدول فونت بازی.</p>
+        <a class="dl" href="https://fontforge.org/en-US/downloads/" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i>fontforge.org</a></div>
+      <div class="card"><h4><i class="fa-solid fa-language"></i> Weblate (Self-hosted)</h4>
+        <p>پلتفرم مدیریت ترجمهٔ تیمی متن‌باز؛ برای مدیریت ۵۰هزار رشتهٔ ترجمه با چند مترجم ضروری است.</p>
+        <a class="dl" href="https://weblate.org/en/download/" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i>weblate.org/download</a></div>
+      <div class="card"><h4><i class="fa-solid fa-code"></i> Visual Studio Code</h4>
+        <p>ویرایشگر کد با افزونه‌های Python، Hex Editor و Persian RTL برای بازبینی اسکریپت‌های ترجمه‌شده.</p>
+        <a class="dl" href="https://code.visualstudio.com/download" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i>code.visualstudio.com</a></div>
+      <div class="card"><h4><i class="fa-solid fa-brands fa-git-alt"></i> Git + Git LFS</h4>
+        <p>کنترل نسخه برای اسکریپت‌ها و فایل‌های ترجمه. Git LFS برای فایل‌های حجیم باینری (فونت، تصاویر ویرایش‌شده).</p>
+        <a class="dl" href="https://git-scm.com/downloads" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i>git-scm.com</a></div>
+      <div class="card"><h4><i class="fa-solid fa-image"></i> GIMP + ImageMagick</h4>
+        <p>ویرایش تصاویر UI (منوها، دکمه‌ها) و پردازش دسته‌ای فایل‌های BTX/PNG استخراج‌شده از بازی.</p>
+        <a class="dl" href="https://www.gimp.org/downloads/" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i>gimp.org</a></div>
+      <div class="card"><h4><i class="fa-solid fa-cube"></i> QuickBMS</h4>
+        <p>موتور اسکریپت‌پذیر استخراج آرشیو از ZenHAX؛ برای فرمت‌هایی که GARbro پوشش نمی‌دهد، اسکریپت BMS می‌نویسیم.</p>
+        <a class="dl" href="https://aluigi.altervista.org/quickbms.htm" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i>aluigi.altervista.org/quickbms</a></div>
+      <div class="card"><h4><i class="fa-solid fa-microchip"></i> x64dbg / Ghidra</h4>
+        <p>دیباگر و دیس‌اسمبلر — فقط اگر لازم شود رمزگذاری یا چک‌سام فایل‌ها را در فایل اجرایی بازی پیدا و خنثی کنیم (مرحلهٔ پیشرفته).</p>
+        <a class="dl" href="https://x64dbg.com/" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i>x64dbg.com</a>
+        &nbsp;|&nbsp;
+        <a class="dl" href="https://ghidra-sre.org/" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i>ghidra-sre.org</a></div>
+    </div>
+
+    <h3><i class="fa-solid fa-list-check"></i> پیش‌نیازهای فنی (Technical Prerequisites)</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>پیش‌نیاز</th><th>سطح لازم</th><th>توضیح ساده</th></tr></thead>
+      <tbody>
+        <tr><td><b>سخت‌افزار</b></td><td><span class="badge b-easy">حداقلی</span></td><td>حداقل ۸ گیگابایت رم، ۳۰ گیگابایت فضای خالی SSD (نسخه‌های چندگانهٔ بازی + فایل‌های استخراج‌شده + بکاپ)، پردازندهٔ ۴ هسته‌ای به بالا، ویندوز ۱۰/۱۱ ۶۴بیت (خود بازی روی ویندوز اجرا می‌شود؛ ابزارهای ما روی ویندوز و لینوکس کار می‌کنند).</td></tr>
+        <tr><td><b>Python</b></td><td><span class="badge b-med">متوسط</span></td><td>توانایی خواندن/نوشتن اسکریپت: کار با <code class="inl">struct.unpack</code>، فایل‌های باینری، انکدینگ‌ها. اگر بلد نیستید، دورهٔ Python Crash Course کافی است.</td></tr>
+        <tr><td><b>فایل‌های باینری</b></td><td><span class="badge b-med">متوسط</span></td><td>درک مفاهیم Endianness (ترتیب بایت‌ها)، Header، Offset، Pointer Table — یعنی بدانید «آدرس یک رشتهٔ متن داخل فایل» یعنی چه.</td></tr>
+        <tr><td><b>انکدینگ متن</b></td><td><span class="badge b-easy">پایه</span></td><td>تفاوت Shift-JIS (انکدینگ ژاپنی بازی) با UTF-8 (انکدینگ موردنیاز فارسی) و مفهوم Code Page.</td></tr>
+        <tr><td><b>زبان ژاپنی</b></td><td><span class="badge b-hard">پیشرفته (برای مترجم)</span></td><td>حداقل یک نفر در تیم باید سطح N2/N1 داشته باشد؛ ترجمهٔ ماشینی خام برای Steins;Gate (پر از اصطلاح علمی و بازی کلمات) فاجعه‌بار است.</td></tr>
+        <tr><td><b>Git</b></td><td><span class="badge b-easy">پایه</span></td><td>Commit، Branch، Merge — برای مدیریت نسخه‌های ترجمه بین اعضای تیم.</td></tr>
+        <tr><td><b>انگلیسی فنی</b></td><td><span class="badge b-med">متوسط</span></td><td>خواندن مستندات ابزارها و گفت‌وگو در انجمن‌های ZenHAX/GBAtemp به انگلیسی انجام می‌شود. نسخهٔ Steam بازی دارای ترجمهٔ رسمی انگلیسی است که به‌عنوان مرجع دوم (Pivot) استفاده می‌کنیم.</td></tr>
+      </tbody>
+    </table></div>
+  </div></div>
+</section>
+
+<!-- ============================================================
+     SECTION 2 : DOWNLOAD & INSTALL
+============================================================ -->
+<section class="acc searchable" id="sec2">
+  <div class="acc-head">
+    <span class="num">SEC-02</span>
+    <h2>دانلود و نصب بازی <span>Download &amp; Install — تهیه نسخهٔ PC، نصب و تأیید صحت</span></h2>
+    <i class="fa-solid fa-chevron-down chev"></i>
+  </div>
+  <div class="acc-body"><div class="acc-inner">
+
+    <div class="danger"><i class="fa-solid fa-scale-balanced"></i><div>
+      <b>تذکر حقوقی و اخلاقی (مهم):</b> این پروژه یک <b>پچ ترجمهٔ غیررسمی (Fan Translation Patch)</b> است و طبق عرف جهانی فن‌ترنسلیشن، فقط روی <b>نسخهٔ قانونی و خریداری‌شدهٔ بازی</b> اعمال می‌شود. ما هیچ فایل کرک‌شده یا کپی غیرقانونی بازی را توزیع نمی‌کنیم و لینک‌های این بخش فقط به <b>فروشگاه‌های رسمی</b> اشاره می‌کنند. پچ نهایی ما هم فقط شامل فایل‌های ترجمه خواهد بود، نه فایل‌های اصلی بازی. خرید نسخهٔ اصلی، هم از سازنده حمایت می‌کند و هم تضمین می‌کند ساختار فایل‌ها دقیقاً همان چیزی است که ما آنالیز کرده‌ایم.
+    </div></div>
+
+    <h3><i class="fa-solid fa-cart-shopping"></i> از کجا نسخهٔ PC را تهیه کنیم؟ (لینک‌های رسمی و معتبر)</h3>
+    <p>دو نسخهٔ اصلی PC وجود دارد. برای این پروژه <b>نسخهٔ اصلی (Original / Steam HD)</b> را انتخاب می‌کنیم، نه Elite — دلیلش در پایین توضیح داده شده:</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>نسخه</th><th>فروشگاه / لینک معتبر</th><th>قیمت تقریبی</th><th>مناسب پروژه؟</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>STEINS;GATE</b> (نسخهٔ اصلی، HD Remaster)</td>
+          <td><a href="https://store.steampowered.com/app/412830/STEINSGATE/" target="_blank" rel="noopener"><i class="fa-brands fa-steam"></i> Steam — App ID 412830</a><br><a href="https://www.gog.com/en/game/steinsgate" target="_blank" rel="noopener"><i class="fa-solid fa-store"></i> GOG (نسخهٔ بدون DRM)</a></td>
+          <td class="mono">~$24.99 (با تخفیف تا ~$5)</td>
+          <td><span class="badge b-easy"><i class="fa-solid fa-check"></i>بله — نسخهٔ هدف پروژه</span></td>
+        </tr>
+        <tr>
+          <td><b>STEINS;GATE ELITE</b> (بازسازی انیمیشنی)</td>
+          <td><a href="https://store.steampowered.com/app/819030/STEINSGATE_ELITE/" target="_blank" rel="noopener"><i class="fa-brands fa-steam"></i> Steam — App ID 819030</a></td>
+          <td class="mono">~$34.99</td>
+          <td><span class="badge b-hard"><i class="fa-solid fa-xmark"></i>خیر — ساختار کاملاً متفاوت (Unity) و متن‌ها داخل bundles هستند؛ پروژهٔ جداگانه‌ای می‌خواهد</span></td>
+        </tr>
+        <tr>
+          <td><b>STEINS;GATE: My Darling's Embrace</b> (اسپین‌آف)</td>
+          <td><a href="https://store.steampowered.com/app/970560/STEINSGATE_My_Darlings_Embrace/" target="_blank" rel="noopener"><i class="fa-brands fa-steam"></i> Steam — App ID 970560</a></td>
+          <td class="mono">~$29.99</td>
+          <td><span class="badge b-med"><i class="fa-solid fa-minus"></i>اختیاری — همان موتور، قابل ترجمه با همین Pipeline در آینده</span></td>
+        </tr>
+      </tbody>
+    </table></div>
+    <div class="tip"><i class="fa-solid fa-circle-check"></i><div>
+      <b>چرا نسخهٔ GOG را پیشنهاد می‌کنیم؟</b> نسخهٔ GOG کاملاً <b>DRM-Free</b> است؛ یعنی هیچ قفل آنلاین یا لانچر اجباری ندارد و فایل اجرایی آن تمیزتر است. این کار آنالیز باینری و تست‌های مکرر در مراحل ۷ تا ۹ را بسیار ساده‌تر می‌کند. نسخهٔ Steam هم قابل استفاده است (به‌خصوص چون ترجمهٔ رسمی انگلیسی را به‌صورت هم‌زمان ارائه می‌دهد)، اما آپدیت‌های خودکار Steam ممکن است وسط پروژه فایل‌ها را تغییر دهد — پس اگر Steam را انتخاب کردید، حتماً <b>آپدیت خودکار را غیرفعال کنید</b>.
+    </div></div>
+    <div class="note"><i class="fa-solid fa-shield-halved"></i><div>
+      <b>دربارهٔ «کرک و آپدیت»:</b> نسخهٔ Steam/GOG فعلی (v1.0.0.3 به بعد) نیازی به هیچ پچ یا کرک جانبی ندارد. تنها «آپدیتی» که ممکن است لازم شود، <b>پچ بهبود فن‌ساختهٔ Committee of Zero</b> نیست (آن مخصوص S;G 0 است)؛ برای Steins;Gate اصلی، نسخهٔ رسمی کافی است. اگر روزی تصمیم گرفتیم پچ CoZ را هم با ترجمه سازگار کنیم، در مرحلهٔ ۷ بررسی می‌شود.
+    </div></div>
+
+    <h3><i class="fa-solid fa-keyboard"></i> فرم ثبت لینک‌های جایگزین (آفلاین/آینه‌ای)</h3>
+    <p>اگر لینک‌های بالا در منطقهٔ شما در دسترس نیستند یا سرور دانلود داخلی تیم ساخته‌اید، لینک‌های جایگزین را اینجا ثبت کنید تا در مستندات تیم بماند:</p>
+    <div class="fake-form">
+      <div class="row">
+        <div style="flex:2;min-width:220px">
+          <label><i class="fa-solid fa-link"></i> لینک جایگزین نسخهٔ اصلی (Mirror URL)</label>
+          <input type="url" placeholder="https://mirror.example.com/steinsgate_pcg..." dir="ltr">
+        </div>
+        <div style="flex:1;min-width:160px">
+          <label><i class="fa-solid fa-tag"></i> برچسب نسخه</label>
+          <input type="text" placeholder="GOG v1.0.0.3 / Steam HD">
+        </div>
+      </div>
+      <div class="row">
+        <div style="flex:2;min-width:220px">
+          <label><i class="fa-solid fa-link"></i> لینک آپدیت / پچ رسمی (اختیاری)</label>
+          <input type="url" placeholder="https://..." dir="ltr">
+        </div>
+        <div style="flex:1;min-width:160px">
+          <label><i class="fa-solid fa-hashtag"></i> هش فایل (SHA-256)</label>
+          <input type="text" placeholder="a1b2c3d4..." dir="ltr">
+        </div>
+      </div>
+      <div style="margin-top:14px"><button class="btn" onclick="this.innerHTML='<i class=&quot;fa-solid fa-check&quot;></i> ثبت شد (نمایشی)'"><i class="fa-solid fa-plus"></i> افزودن لینک جایگزین</button></div>
+    </div>
+
+    <h3><i class="fa-solid fa-download"></i> آموزش گام‌به‌گام نصب (با اسکرین‌شات‌های شماتیک)</h3>
+    <div class="steps">
+      <div class="step">
+        <h4>خرید و دانلود بازی از فروشگاه</h4>
+        <p>در Steam روی <b>Install</b> کلیک کنید یا در GOG فایل نصب‌کنندهٔ آفلاین (<span class="mono">setup_steinsgate_*.exe</span>) را دانلود کنید. حجم دانلود نسخهٔ اصلی حدود <b>۵ تا ۷ گیگابایت</b> است. مسیر نصب پیش‌فرض Steam: <span class="mono">C:\Program Files (x86)\Steam\steamapps\common\STEINS;GATE</span></p>
+        <div class="shot"><div class="bar">[ Steam Library — STEINS;GATE ]</div>
+          STEINS;GATE &nbsp;&nbsp;|&nbsp;&nbsp; <span class="hl">▶ INSTALL</span> &nbsp;&nbsp; 5.9 GB required<br>
+          <span class="btn">INSTALL</span> <span class="btn">CANCEL</span>
+        </div>
+      </div>
+      <div class="step">
+        <h4>انتخاب مسیر نصب سفارشی (توصیه‌شده)</h4>
+        <p>برای جلوگیری از مشکلات دسترسی UAC، بازی را در مسیری <b>بدون فاصله و کاراکتر خاص</b> و خارج از Program Files نصب کنید. مسیر پیشنهادی ما: <span class="mono">D:\Games\STEINSGATE\</span> — این مسیر را در تمام اسکریپت‌های پروژه به‌عنوان <code class="inl">GAME_ROOT</code> استفاده می‌کنیم.</p>
+        <div class="shot"><div class="bar">[ Setup — Choose Install Location ]</div>
+          Destination Folder:<br>
+          <span class="hl">D:\Games\STEINSGATE\</span> <span style="color:#5a7396">← بدون فاصله، بدون فارسی!</span><br>
+          <span class="btn">BROWSE...</span> <span class="btn">NEXT &gt;</span>
+        </div>
+      </div>
+      <div class="step">
+        <h4>غیرفعال کردن آپدیت خودکار Steam (فقط برای نسخهٔ Steam)</h4>
+        <p>روی بازی راست‌کلیک → Properties → Updates → گزینهٔ <b>"Only update this game when I launch it"</b> را انتخاب کنید. این کار جلوی تغییر ناگهانی فایل‌ها وسط پروژه را می‌گیرد.</p>
+        <div class="shot"><div class="bar">[ Properties → Updates ]</div>
+          Automatic Updates: <span class="hl">Only update this game when I launch it ▾</span><br>
+          Background downloads: <span class="hl">Never allow ▾</span>
+        </div>
+      </div>
+      <div class="step">
+        <h4>اجرای اولیه و تست سلامت</h4>
+        <p>بازی را یک بار کامل اجرا کنید: منوی اصلی باید بیاید، New Game را بزنید و تا اولین دیالوگ (آکواچیه؟ نه! — صحنهٔ رادیو‌کان با مایوری) برسید. این کار فایل‌های Config و سیو اولیه را می‌سازد و ثابت می‌کند نصب سالم است. سپس بازی را ببندید.</p>
+        <div class="shot"><div class="bar">[ STEINS;GATE — Title Screen ]</div>
+          ☰ NEW GAME &nbsp; LOAD &nbsp; CONFIG &nbsp; EXTRA<br>
+          <span class="hl">"だから、今日までの──" ← اولین دیالوگ OK ✓</span>
+        </div>
+      </div>
+      <div class="step">
+        <h4>ساخت نسخهٔ پشتیبان از پوشهٔ بازی (حیاتی!)</h4>
+        <p>قبل از هر دست‌کاری، کل پوشهٔ بازی را کپی کنید: <span class="mono">D:\Games\STEINSGATE_BACKUP_CLEAN\</span> — این «نسخهٔ طلایی» (Golden Master) شماست. اگر در مرحلهٔ ۷ فایلی خراب شد، از اینجا برمی‌گردانیم. همچنین هش SHA-256 فایل‌های کلیدی را ثبت کنید:</p>
+<pre><span class="c"># PowerShell — ثبت هش فایل‌های کلیدی برای مقایسه‌های بعدی</span>
+<span class="k">Get-FileHash</span> D:\Games\STEINSGATE\*.exe -Algorithm SHA256 | <span class="k">Out-File</span> hashes_clean.txt
+<span class="k">Get-ChildItem</span> D:\Games\STEINSGATE -Recurse | <span class="k">Measure-Object</span> Length -Sum</pre>
+      </div>
+    </div>
+
+    <h3><i class="fa-solid fa-clipboard-check"></i> چک‌لیست تأیید نصب (Post-Install Verification)</h3>
+    <p>بعد از نصب، پوشهٔ بازی را باز کنید و موارد زیر را یک‌به‌یک تیک بزنید. اگر هر کدام وجود نداشت، نصب ناقص است:</p>
+    <ul class="check">
+      <li><i class="fa-solid fa-square-check"></i><div><b>فایل اجرایی بازی</b> — <span class="mono">STEINSGATE.exe</span> (یا <span class="mono">Launcher.exe</span> + <span class="mono">Game.exe</span> بسته به نسخه) در ریشهٔ پوشه موجود است و اجرا می‌شود.</div></li>
+      <li><i class="fa-solid fa-square-check"></i><div><b>آرشیوهای اصلی MPK</b> — فایل‌هایی با پسوند <span class="mono">.mpk</span> مثل <span class="mono">script.mpk</span>, <span class="mono">system.mpk</span>, <span class="mono">bg.mpk</span>, <span class="mono">chara.mpk</span>, <span class="mono">voice.mpk</span>, <span class="mono">bgm.mpk</span>, <span class="mono">movie.mpk</span>, <span class="mono">se.mpk</span> در ریشه یا زیرپوشهٔ <span class="mono">USRDIR\</span> وجود دارند.</div></li>
+      <li><i class="fa-solid fa-square-check"></i><div><b>حجم کلی پوشه</b> — بین ۵ تا ۷ گیگابایت است. کمتر از ۴ گیگابایت یعنی دانلود ناقص بوده (احتمالاً فایل‌های صوتی یا ویدیویی گم شده‌اند).</div></li>
+      <li><i class="fa-solid fa-square-check"></i><div><b>پوشهٔ سیو</b> — بعد از اولین اجرا، پوشهٔ <span class="mono">%USERPROFILE%\Documents\My Games\mages\STEINS;GATE\</span> (یا مسیر مشابه) ساخته شده و فایل‌های <span class="mono">systemdata.dat</span> و <span class="mono">config</span> در آن هست.</div></li>
+      <li><i class="fa-solid fa-square-check"></i><div><b>زبان‌ها</b> — در منوی Config بازی، گزینهٔ تعویض زبان ژاپنی/انگلیسی وجود دارد (نسخهٔ Steam دوزبانه است؛ این برای Pivot Translation حیاتی است).</div></li>
+      <li><i class="fa-solid fa-square-check"></i><div><b>بکاپ طلایی</b> — کپی کامل پوشه در مسیر جداگانه ساخته شده و هش‌ها در <span class="mono">hashes_clean.txt</span> ثبت شده‌اند.</div></li>
+      <li><i class="fa-solid fa-square-check"></i><div><b>آپدیت خودکار خاموش</b> — (فقط Steam) تنظیمات آپدیت روی حالت دستی قرار گرفته است.</div></li>
+    </ul>
+  </div></div>
+</section>
+
+<!-- ============================================================
+     SECTION 3 : GAME STRUCTURE ANALYSIS
+============================================================ -->
+<section class="acc searchable" id="sec3">
+  <div class="acc-head">
+    <span class="num">SEC-03</span>
+    <h2>آنالیز ساختار بازی <span>Game Structure Analysis — نقشهٔ کامل فایل‌ها و فرمت‌ها</span></h2>
+    <i class="fa-solid fa-chevron-down chev"></i>
+  </div>
+  <div class="acc-body"><div class="acc-inner">
+
+    <h3><i class="fa-solid fa-folder-tree"></i> نقشهٔ کامل پوشه‌ها و فایل‌ها بعد از نصب</h3>
+    <p>این ساختار بر اساس نسخهٔ Steam/GOG نسخهٔ اصلی (HD) است. نام دقیق برخی فایل‌ها ممکن است بین نسخه‌ها کمی تفاوت داشته باشد، اما الگوی کلی ثابت است:</p>
+    <div class="tree"><span class="dir">D:\Games\STEINSGATE\</span>
+├── <span class="hot">STEINSGATE.exe</span>          <span class="cmt">← فایل اجرایی اصلی (Main Executable) — قلب موتور MagesEngine</span>
+├── <span class="hot">script.mpk</span>             <span class="cmt">← ★ هدف اصلی ما: آرشیو اسکریپت‌ها و دیالوگ‌ها (SCX files)</span>
+├── <span class="hot">system.mpk</span>             <span class="cmt">← ★ متون سیستمی، منوها، TIPs (واژه‌نامه داخل بازی) و فونت</span>
+├── <span class="dir">bg.mpk</span>                   <span class="cmt">← پس‌زمینه‌ها (Backgrounds) — فرمت داخلی تصویری</span>
+├── <span class="dir">chara.mpk</span>                <span class="cmt">← اسپرایت کاراکترها (Character Sprites)</span>
+├── <span class="dir">mask.mpk / effect.mpk</span>    <span class="cmt">← افکت‌های بصری و ماسک‌های گذار</span>
+├── <span class="dir">bgm.mpk</span>                  <span class="cmt">← موسیقی متن (~40 ترک، فرمت NUS3/AAC یا OGG بسته به نسخه)</span>
+├── <span class="dir">voice.mpk</span>                <span class="cmt">← ویس کامل ژاپنی همهٔ دیالوگ‌ها (~3 گیگابایت) — ترجمه نمی‌شود!</span>
+├── <span class="dir">se.mpk</span>                   <span class="cmt">← افکت‌های صوتی (Sound Effects)</span>
+├── <span class="dir">movie.mpk</span>                <span class="cmt">← ویدیوهای OP/ED و کات‌سین‌ها (USM/CRI Sofdec — برای زیرنویس در مرحله ۸)</span>
+├── <span class="dir">phonetex.mpk</span>             <span class="cmt">← ★ تصاویر رابط گوشی (Phone UI) — شامل تصاویر D-Mail — متن داخلش تصویری است!</span>
+├── steam_api64.dll / steam_api.dll  <span class="cmt">← فایل‌های اتصال Steam (فقط نسخهٔ Steam؛ در GOG نیست)</span>
+├── steamapps\ / *.acf         <span class="cmt">← متادیتای Steam</span>
+└── <span class="dir">savedata\ یا Documents\My Games\mages\</span>
+    ├── systemdata.dat         <span class="cmt">← سیستم‌سیو: فلگ‌های پایان‌ها، TIPs بازشده</span>
+    └── save000.dat ...        <span class="cmt">← سیوهای دستی کاربر</span></div>
+
+    <h3><i class="fa-solid fa-file-code"></i> شناسایی فایل اصلی حاوی اسکریپت‌ها و دیالوگ‌ها</h3>
+    <p>
+      در موتور MAGES.، تمام دیالوگ‌ها، انتخاب‌ها (Choices)، منطق شاخه‌بندی داستان (Branching Logic) و متون سیستمی داخل فایل‌هایی با فرمت <b>SCX</b> (اسکریپت کامپایل‌شدهٔ MAGES.) هستند که خودشان داخل آرشیو <span class="mono">script.mpk</span> بسته‌بندی شده‌اند. هر فصل (Chapter) یک یا چند فایل SCX دارد؛ نام‌گذاری معمولاً به این شکل است:
+    </p>
+<pre><span class="c">// نمونه ساختار داخلی script.mpk (بعد از استخراج در مرحله ۲)</span>
+script.mpk
+├── <span class="k">prologue.scx</span>        <span class="c">// پرولوگ — کنفرانس رادیو‌کان</span>
+├── <span class="k">sg01_01.scx</span>         <span class="c">// فصل ۱ — Time Travel Paranoia</span>
+├── <span class="k">sg02_01.scx</span>         <span class="c">// فصل ۲ — ...</span>
+├── <span class="k">...</span>
+├── <span class="k">sg11_01.scx</span>         <span class="c">// فصل ۱۱ — مسیرهای پایانی</span>
+├── <span class="k">phone.scx</span>           <span class="c">// ★ منطق Phone Trigger و D-Mail ها</span>
+├── <span class="k">tips.scx</span>            <span class="c">// ★ واژه‌نامهٔ TIPs (~120 مدخل علمی/فرهنگی)</span>
+└── <span class="k">system_menu.scx</span>     <span class="c">// رشته‌های منو و UI</span></pre>
+    <div class="note"><i class="fa-solid fa-circle-info"></i><div>
+      <b>توضیح ساده:</b> فایل SCX مثل «نمایشنامهٔ کامپایل‌شده» است — یعنی نمایشنامه‌ای که نویسندگان MAGES. نوشته‌اند و بعد به زبان ماشین موتور تبدیل شده. ما باید آن را Decompile کنیم تا دوباره «نمایشنامهٔ خوانا» شود، ترجمه‌اش کنیم و دوباره Compile کنیم.
+    </div></div>
+
+    <h3><i class="fa-solid fa-font"></i> شناسایی فایل فونت بازی</h3>
+    <p>
+      فونت بازی معمولاً داخل <span class="mono">system.mpk</span> قرار دارد و با نام‌هایی مثل <span class="mono">font.dat</span>، <span class="mono">font.fnt</span> یا یک فایل <b>Bitmap Font</b> (تصویر PNG/DDS حاوی گلیف‌ها + فایل مختصات) همراه است. نکتهٔ کلیدی:
+    </p>
+    <ul>
+      <li><b>فونت پیش‌فرض ژاپنی</b> یک Bitmap Font با چند هزار گلیف کانجی/کانا است که <b>هیچ گلیف فارسی/عربی ندارد</b> — بدون تزریق فونت جدید، حروف فارسی به‌صورت مربع توخالی (Tofu □□□) نمایش داده می‌شوند.</li>
+      <li>نسخهٔ Steam برای ترجمهٔ رسمی انگلیسی، یک فونت لاتین جداگانه هم دارد که آن هم طبیعتاً گلیف فارسی ندارد اما <b>ثابت می‌کند موتور از چند فونت هم‌زمان پشتیبانی می‌کند</b> — این برای ما خبر عالی است.</li>
+      <li>استراتژی ما در مرحلهٔ ۶: تولید یک Bitmap Font فارسی از فونت متن‌باز (مثل Vazirmatn یا Noto Naskh Arabic) با ابزار FontForge/Hiero و جایگزینی یا افزودن آن به جدول فونت موتور.</li>
+    </ul>
+
+    <h3><i class="fa-solid fa-gears"></i> شناسایی موتور بازی (Engine Fingerprinting)</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>شواهد</th><th>نتیجه</th></tr></thead>
+      <tbody>
+        <tr><td>پسوند آرشیوها: <span class="mono">.mpk</span> (MAGES. Package)</td><td rowspan="3"><b>موتور: MAGES. Engine (MagesEngine)</b><br>همان موتور CHAOS;HEAD, STEINS;GATE 0, ROBOTICS;NOTES<br><span style="color:var(--muted)">نقطهٔ مقابل: KiriKiri (.xp3) — که در این نسخه استفاده نشده؛ ابزارهای XP3 مثل KrkrExtract فقط برای نسخه‌های بسیار قدیمی (PC 2008 ژاپنی روی موتور متفاوت) کاربرد دارند.</span></td></tr>
+        <tr><td>فرمت اسکریپت: <span class="mono">.scx</span> (کامپایل‌شده، باینری)</td></tr>
+        <tr><td>فرمت ویدیو: <span class="mono">.usm</span> (CRI Middleware Sofdec2) — امضای CRIWARE در فایل اجرایی</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3><i class="fa-solid fa-file-lines"></i> فرمت فایل‌های متنی — جدول خلاصه</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>نوع داده</th><th>فرمت</th><th>انکدینگ متن</th><th>قابل استخراج؟</th></tr></thead>
+      <tbody>
+        <tr><td>دیالوگ‌ها و اسکریپت (SCX)</td><td><span class="badge b-med">Encrypted Binary + Compiled</span></td><td class="mono">Shift-JIS (JP) / UTF-8 (EN)</td><td><span class="badge b-easy">بله — با ابزار اختصاصی (MagesTool/CoZ)</span></td></tr>
+        <tr><td>آرشیوها (MPK)</td><td><span class="badge b-easy">Container (با جدول فشرده‌سازی LZSS/Deflate)</span></td><td class="mono">—</td><td><span class="badge b-easy">بله — ساختار شناخته‌شده</span></td></tr>
+        <tr><td>رشته‌های UI در exe</td><td><span class="badge b-med">Plain strings در سکشن .rdata</span></td><td class="mono">UTF-16 LE / Shift-JIS</td><td><span class="badge b-med">نیازمند Hex Editing محتاطانه</span></td></tr>
+        <tr><td>تصاویر متن‌دار (Phone، منوها)</td><td><span class="badge b-med">BTX / PNG / DDS</span></td><td class="mono">—</td><td><span class="badge b-med">بله — ولی متن به‌صورت پیکسلی است (باید بازطراحی شود)</span></td></tr>
+        <tr><td>ویدیوها</td><td><span class="badge b-hard">USM (Sofdec2)</span></td><td class="mono">—</td><td><span class="badge b-med">با VGMToolbox/FFmpeg — زیرنویس به‌صورت Hard-sub یا Overlay</span></td></tr>
+        <tr><td>سیوها</td><td><span class="badge b-hard">Binary + Checksum</span></td><td class="mono">—</td><td><span class="badge b-hard">خیر — لمس نمی‌کنیم (جزئیات در بخش ۴)</span></td></tr>
+      </tbody>
+    </table></div>
+
+    <h3><i class="fa-solid fa-magnifying-glass-chart"></i> آنالیز اولیه: وضعیت رمزگذاری و قابلیت استخراج</h3>
+    <p><b>جمع‌بندی ارزیابی ریسک:</b></p>
+    <ul>
+      <li><b>آرشیوهای MPK:</b> ساختار آن‌ها شناخته‌شده و ابزار متن‌باز موجود است (<a href="https://github.com/CommitteeOfZero" target="_blank" rel="noopener">CommitteeOfZero tools</a>). فشرده‌سازی داخلی معمولاً LZSS یا Deflate است که هر دو استاندارد هستند. <span class="badge b-easy">ریسک پایین</span></li>
+      <li><b>اسکریپت‌های SCX:</b> کامپایل‌شده و دارای جدول اشاره‌گر (Pointer Table) هستند؛ رمزنگاری سبک (XOR با کلید ثابت یا Obfuscation ساده) در برخی نسخه‌ها دیده شده که ابزارهای CoZ آن را دور می‌زنند. <span class="badge b-med">ریسک متوسط</span></li>
+      <li><b>چک‌سام/ضددستکاری:</b> نسخهٔ PC بازی <b>DRM سنگین ندارد</b> (Steam DRM معمولی که دور زدنش موضوع این پروژه نیست). فایل اجرایی برخی نسخه‌ها Checksum داخلی روی اسکریپت‌ها انجام می‌دهد؛ این را در مرحلهٔ ۲ با یک آزمون ساده (تغییر یک بایت و اجرای بازی) راستی‌آزمایی می‌کنیم. <span class="badge b-med">ریسک متوسط — قابل مدیریت</span></li>
+      <li><b>پشتیبانی از Unicode در موتور:</b> نسخهٔ Steam به‌خاطر ترجمهٔ رسمی انگلیسی، <b>پایپ‌لاین رندر UTF-8/UTF-16 دارد</b> — یعنی بزرگ‌ترین مانع تاریخی فن‌ترنسلیشن ژاپنی→فارسی (اجبار به Shift-JIS) در این نسخه تقریباً حل شده است. <span class="badge b-easy">خبر عالی</span></li>
+    </ul>
+    <div class="tip"><i class="fa-solid fa-flag-checkered"></i><div>
+      <b>نتیجهٔ آنالیز اولیه:</b> حدود <b>۸۵٪ از دارایی‌های متنی بازی</b> با ابزارهای موجود قابل استخراج است. ۱۵٪ باقی‌مانده (متن‌های تصویری Phone UI و برخی رشته‌های هاردکدشده در exe) به کار دستی نیاز دارد. هیچ رمزنگاری سفارشیِ ناشناخته‌ای در این نسخه گزارش نشده است.
+    </div></div>
+  </div></div>
+</section>
+
+<!-- ============================================================
+     SECTION 4 : REAL TECHNICAL CHALLENGES
+============================================================ -->
+<section class="acc searchable" id="sec4">
+  <div class="acc-head">
+    <span class="num">SEC-04</span>
+    <h2>چالش‌های فنی واقعی <span>Real Technical Challenges — موانع شناخته‌شده و راه‌حل هر کدام</span></h2>
+    <i class="fa-solid fa-chevron-down chev"></i>
+  </div>
+  <div class="acc-body"><div class="acc-inner">
+
+    <h3><i class="fa-solid fa-language"></i> چالش ۱: کدگذاری کاراکترها (Shift-JIS → UTF-8)</h3>
+    <p>
+      متن‌های ژاپنی بازی با انکدینگ <b>Shift-JIS</b> (cp932) ذخیره شده‌اند — انکدینگی دوبایتی که فقط حروف ژاپنی و لاتین را پوشش می‌دهد و <b>اصلاً جایی برای حروف فارسی ندارد</b>. اگر فارسی را مستقیم با همان ساختار باینری بنویسیم، موتور یا کرش می‌کند یا نویسه‌های به‌هم‌ریخته (Mojibake) نشان می‌دهد.
+    </p>
+    <p><b>راه‌حل مهندسی ما:</b></p>
+    <ul>
+      <li>چون نسخهٔ Steam رسماً انگلیسی را هم پشتیبانی می‌کند، موتور مسیر رندر <b>UTF-8</b> دارد؛ ما متن فارسی را به UTF-8 تبدیل کرده و در همان مسیر انگلیسی تزریق می‌کنیم (تکنیک <b>Language-Slot Hijacking</b>: اسلات زبان انگلیسی را به فارسی اختصاص می‌دهیم).</li>
+      <li>تمام Pipeline ما یک نرمالایزر انکدینگ دارد که خروجی همیشه <code class="inl">UTF-8 (بدون BOM)</code> است:</li>
+    </ul>
+<pre><span class="c"># نمونه: خواندن Shift-JIS و نوشتن UTF-8 در Pipeline مرحله ۳</span>
+raw = path.read_bytes()
+jp_text = raw.decode(<span class="s">"shift_jis"</span>, errors=<span class="s">"replace"</span>)   <span class="c"># ورودی ژاپنی</span>
+...
+out_path.write_text(fa_text, encoding=<span class="s">"utf-8"</span>)           <span class="c"># خروجی فارسی — بدون BOM!</span></pre>
+    <div class="warn"><i class="fa-solid fa-triangle-exclamation"></i><div>
+      <b>تلهٔ رایج:</b> اگر فایل UTF-8 را با BOM (<span class="mono">EF BB BF</span>) ذخیره کنید، برخی پارسرهای MAGES. سه بایت اول را جزو متن حساب می‌کنند و اولین خط هر فایل خراب می‌شود. همیشه بدون BOM ذخیره کنید.
+    </div></div>
+
+    <h3><i class="fa-solid fa-arrows-left-right"></i> چالش ۲: طول متن (Text Expansion)</h3>
+    <p>
+      فارسی نسبت به ژاپنی معمولاً <b>۴۰ تا ۷۰ درصد طولانی‌تر</b> است (ژاپنی با کانجی اطلاعات را فشرده می‌کند). جعبهٔ متن بازی برای ۲ تا ۳ خط ژاپنی طراحی شده. اگر متن سرریز کند، یا از کادر بیرون می‌زند یا روی اسم کاراکتر می‌نشیند.
+    </p>
+    <p><b>راه‌حل‌ها (به ترتیب اولویت):</b></p>
+    <ol>
+      <li><b>کاهش اندازهٔ فونت متن دیالوگ</b> (مثلاً از ۳۲px به ۲۶px) از طریق فایل کانفیگ فونت در system.mpk — ساده‌ترین و مؤثرترین راه.</li>
+      <li><b>افزایش ارتفاع جعبهٔ متن</b> با ویرایش مختصات UI در اسکریپت سیستمی یا تصویر پس‌زمینهٔ جعبه (مرحلهٔ ۶).</li>
+      <li><b>استفاده از تگ شکست خط موتور</b> (<span class="mono">\n</span> یا تگ اختصاصی <span class="mono">[line]</span> در SCX) برای تقسیم دستی دیالوگ‌های بلند به چند پیام متوالی — این کار تعداد «کلیک» را زیاد می‌کند اما خوانایی را حفظ می‌کند.</li>
+      <li><b>بازنویسی اقتبازی</b>: مترجم باید معادل‌های کوتاه‌تر فارسی را ترجیح دهد (مثلاً به‌جای «دستگاه انتقال پیام به گذشته» ← «تله‌گرام زمانی» یا همان «دی‌میل»).</li>
+    </ol>
+
+    <h3><i class="fa-solid fa-font"></i> چالش ۳: فونت و رندر چپ‌به‌راست در برابر راست‌به‌چپ</h3>
+    <p>
+      این <b>سخت‌ترین چالش کل پروژه</b> است. دو مسئلهٔ جدا داریم:
+    </p>
+    <ul>
+      <li><b>الف) گلیف فارسی نداریم:</b> فونت‌های داخل بازی فقط کانجی/کانا/لاتین دارند. راه‌حل: ساخت Bitmap Font فارسی از روی فونت Vazirmatn و تزریق آن به جدول فونت موتور (با ابزار FontForge و یک اسکریپت پایتون که گلیف‌ها را به Atlas تبدیل می‌کند).</li>
+      <li><b>ب) جهت متن:</b> موتور متن را <b>چپ‌به‌راست (LTR)</b> رندر می‌کند و از <b>Shaping عربی/فارسی</b> (اتصال حروف: «م‌ح‌م‌د» ← «محمد») خبر ندارد. فارسی بدون Shaping، حروف را جدا از هم نشان می‌دهد که غیرقابل‌قبول است.</li>
+    </ul>
+    <p><b>راه‌حل عملی (اثبات‌شده در پروژه‌های مشابه عربی/فارسی):</b></p>
+    <ol>
+      <li><b>Pre-Shaping در Pipeline:</b> قبل از تزریق متن به بازی، متن فارسی را با کتابخانهٔ <code class="inl">arabic_reshaper</code> پایتون به «فرم نمایشی» (Presentation Forms) تبدیل می‌کنیم — یعنی اتصال حروف را خودمان از قبل حساب می‌کنیم و به موتور متن «آماده» می‌دهیم.</li>
+      <li><b>معکوس‌سازی ترتیب (Bidi):</b> با <code class="inl">python-bidi</code> ترتیب نمایش راست‌به‌چپ را اعمال می‌کنیم تا موتور LTRِ بازی، متن را درست نشان دهد.</li>
+    </ol>
+<pre><span class="c"># Pre-Shaping + Bidi — قلب Pipeline فارسی (مرحله ۶)</span>
+<span class="k">import</span> arabic_reshaper
+<span class="k">from</span> bidi.algorithm <span class="k">import</span> get_display
+fa = <span class="s">"سلام، اوکابه رینتارو!"</span>
+shaped  = arabic_reshaper.reshape(fa)   <span class="c"># اتصال حروف</span>
+visual  = get_display(shaped)            <span class="c"># ترتیب راست‌به‌چپ → برای رندر LTR</span></pre>
+    <div class="warn"><i class="fa-solid fa-triangle-exclamation"></i><div>
+      <b>اثر جانبی مهم:</b> اعداد و نام‌های لاتین (مثل <span class="mono">D-Mail</span>، <span class="mono">IBN 5100</span>) داخل جملهٔ فارسی نیاز به مارکرهای کنترلی یونیکد (<span class="mono">LRM/RLM</span>) دارند تا وسط جمله به‌هم نریزند. این را با یک پس‌پردازش خودکار در Pipeline حل می‌کنیم و در واژه‌نامهٔ سبک (Style Guide) ثبت می‌کنیم.
+    </div></div>
+
+    <h3><i class="fa-solid fa-mobile-screen-button"></i> چالش ۴: سیستم D-Mail و Phone Trigger</h3>
+    <p>
+      Steins;Gate یک مکانیک امضایی دارد: در لحظات خاص، گوشی اوکابه باز می‌شود و بازیکن باید <b>کلمهٔ کلیدی (Keyword)</b> درون یک ایمیل دریافتی را انتخاب کند تا پاسخ (D-Mail) ارسال شود یا شاخهٔ داستان عوض شود (Phone Trigger). این سیستم دو بخش دارد:
+    </p>
+    <ul>
+      <li><b>متن ایمیل‌ها و پاسخ‌ها</b> در اسکریپت <span class="mono">phone.scx</span> قرار دارند → ترجمهٔ معمولی متن، اما باید <b>کلمات کلیدی قابل‌لمس (Trigger Words)</b> دقیقاً با همان تعداد کاراکترِ مورد انتظار اسکریپت باشند.</li>
+      <li><b>رابط گرافیکی گوشی</b> (قاب گوشی، آیکون‌ها، پس‌زمینهٔ ایمیل) در <span class="mono">phonetex.mpk</span> به‌صورت تصویر است → بخشی از متن‌ها (مثل هدر "MAIL" یا "キーワード") باید در مرحلهٔ ۸ به‌صورت گرافیکی بازطراحی و فارسی شوند.</li>
+    </ul>
+    <div class="danger"><i class="fa-solid fa-bomb"></i><div>
+      <b>ریسک بحرانی:</b> اگر طول کلمهٔ کلیدی ترجمه‌شده با چیزی که اسکریپت انتظار دارد نخواند، Phone Trigger کار نمی‌کند و بازیکن در آن شاخه <b>گیر می‌کند (Soft-Lock)</b>. راه‌حل: در مرحلهٔ ۳، Parser ما یک <b>Validator</b> دارد که تمام کلمات کلیدی ترجمه‌شده را با جدول مرجع چک می‌کند و در مرحلهٔ ۹ تمام Triggerها روی هر دو حالت «پاسخ دادن/ندادن» تست می‌شوند.
+    </div></div>
+
+    <h3><i class="fa-solid fa-code-branch"></i> چالش ۵: پایان‌های چندگانه (۶ Ending)</h3>
+    <p>
+      بازی ۶ پایان دارد (Mayuri، Faris، Luka، Moeka، Suzuha و True End «Kurisu») که با یک زنجیرهٔ حساس از پاسخ‌های D-Mail و انتخاب‌ها فعال می‌شوند. ترجمهٔ اشتباه یک جمله در یک ایمیل می‌تواند مسیر True End را غیرقابل‌دسترس کند (چون Trigger فعال نمی‌شود).
+    </p>
+    <p><b>راه‌حل QA:</b></p>
+    <ul>
+      <li>ساخت <b>ماتریس مسیرها (Route Matrix)</b>: جدولی از تمام تصمیم‌های مؤثر بر Ending + فایل سیو در هر نقطهٔ تصمیم.</li>
+      <li>در مرحلهٔ ۹، با استفاده از سیوهای آماده در نقاط انشعاب، هر ۶ پایان از ابتدا تا Credits تست می‌شود.</li>
+      <li>استفاده از فلگ‌های دیباگ موتور (در صورت وجود) یا ابزار Skip سریع برای طی کردن متن‌های تست‌شده.</li>
+    </ul>
+
+    <h3><i class="fa-solid fa-shield-virus"></i> چالش ۶: Anti-Tamper، DRM و چک‌سام</h3>
+    <ul>
+      <li><b>Steam DRM:</b> فقط روی فایل اجرایی است و با پچ ما (که فایل‌های داده را تغییر می‌دهد، نه exe را) تداخلی ندارد. نسخهٔ GOG اصلاً DRM ندارد.</li>
+      <li><b>Checksum داخلی اسکریپت:</b> برخی بیلدهای MagesEngine هنگام لود اسکریپت، چک‌سام را بررسی می‌کنند. آزمون مرحلهٔ ۲: یک بایت از یک SCX را عوض می‌کنیم؛ اگر بازی اجرا شد یعنی چک‌سامی در کار نیست. اگر کرش کرد، با x64dbg محل چک را پیدا و Patch می‌کنیم (فقط برای نسخهٔ تست داخلی).</li>
+      <li><b>آپدیت خودکار:</b> همان‌طور که در بخش ۲ گفته شد، آپدیت Steam می‌تواند فایل‌های پچ‌شده را بازنویسی کند → غیرفعال می‌شود.</li>
+    </ul>
+
+    <h3><i class="fa-solid fa-list-ul"></i> چالش‌های احتمالی دیگر</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>چالش</th><th>شرح</th><th>ریسک</th><th>راه‌حل</th></tr></thead>
+      <tbody>
+        <tr><td>رشته‌های هاردکد در exe</td><td>برخی متن‌ها (پیغام خطا، نام پنجره) داخل فایل اجرایی هستند</td><td><span class="badge b-med">متوسط</span></td><td>Hex Edit با حفظ طول رشته یا پچ با رشتهٔ کوتاه‌تر + Null-Padding</td></tr>
+        <tr><td>نام کاراکترها در لاگ صوتی</td><td>نام‌ها («هوئین کیوما»، «کوریسو») باید در کل بازی یکدست transliterate شوند</td><td><span class="badge b-easy">آسان</span></td><td>واژه‌نامهٔ اجباری (Glossary) در Weblate + Validator خودکار</td></tr>
+        <tr><td>اصطلاحات علمی/@channel</td><td>بازی پر از اصطلاح فیزیک کوانتوم و اسلنگ انجمن @channel (معادل 2ch) است</td><td><span class="badge b-med">متوسط</span></td><td>بخش TIPs بازی مخصوص همین است؛ ترجمهٔ TIPs با پانوشت فرهنگی</td></tr>
+        <tr><td>فونت ایمیل‌ها (Monospace)</td><td>متن D-Mail با فونت مونواسپیس رندر می‌شود؛ نسخهٔ فارسی مونواسپیس نداریم</td><td><span class="badge b-med">متوسط</span></td><td>استفاده از نزدیک‌ترین فونت خوانا یا اختصاص عرض ثابت مصنوعی در Atlas فونت</td></tr>
+        <tr><td>سرریز در منوی TIPs</td><td>لیست TIPs اسکرول محدودی دارد؛ عنوان‌های بلند فارسی می‌شکنند</td><td><span class="badge b-easy">آسان</span></td><td>عنوان‌های کوتاه + کاهش فونت لیست</td></tr>
+        <tr><td>زیرنویس OP/ED</td><td>ویدیوهای USM زیرنویس ندارند</td><td><span class="badge b-med">متوسط</span></td><td>Hard-sub با FFmpeg یا Overlay گرافیکی در مرحلهٔ ۸</td></tr>
+      </tbody>
+    </table></div>
+  </div></div>
+</section>
+
+<!-- ============================================================
+     SECTION 5 : 10-STEP ROADMAP
+============================================================ -->
+<section class="acc searchable" id="sec5">
+  <div class="acc-head">
+    <span class="num">SEC-05</span>
+    <h2>نقشهٔ راه ۱۰ مرحله‌ای <span>10-Step Roadmap — جدول کامل با ابزار، زمان، خروجی و وابستگی</span></h2>
+    <i class="fa-solid fa-chevron-down chev"></i>
+  </div>
+  <div class="acc-body"><div class="acc-inner">
+    <p>این جدول، سند مرجع کل پروژه است. هر مرحله فقط وقتی شروع می‌شود که خروجی مرحلهٔ وابستهٔ آن <b>تأیید نهایی</b> شده باشد (Definition of Done). ستون «وابستگی» یعنی بدون تکمیل آن مرحله، شروع این مرحله ممنوع است.</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr>
+        <th>#</th><th>عنوان مرحله</th><th>شرح کار</th><th>ابزارها</th><th>زمان (ساعت)</th><th>خروجی (Deliverable)</th><th>وابستگی</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="mono">01</td><td><b>برنامه‌ریزی و آنالیز ساختار</b></td>
+          <td>تهیهٔ نسخهٔ قانونی بازی، نصب، بکاپ طلایی، شناسایی موتور و فرمت‌ها، نوشتن همین سند راهنما</td>
+          <td>Hex Editor، مرورگر، Steam/GOG</td>
+          <td class="mono">~20 ساعت</td>
+          <td>سند فاز ۱ (همین داشبورد) + پوشهٔ بازی تأییدشده + بکاپ</td>
+          <td><span class="badge b-easy">—</span></td>
+        </tr>
+        <tr>
+          <td class="mono">02</td><td><b>استخراج متون خام</b></td>
+          <td>باز کردن script.mpk و system.mpk، استخراج همهٔ فایل‌های SCX و رشته‌ها به فرمت میانی (JSON/TSV)، آزمون چک‌سام</td>
+          <td>MagesTool (CoZ)، GARbro، QuickBMS، پایتون</td>
+          <td class="mono">~30 ساعت</td>
+          <td>پوشهٔ <span class="mono">extracted/</span> با ~۵۰هزار رشتهٔ ژاپنی+انگلیسی به‌همراه ID یکتا</td>
+          <td><span class="badge b-med">مرحله ۱</span></td>
+        </tr>
+        <tr>
+          <td class="mono">03</td><td><b>ساخت Pipeline تبدیل</b></td>
+          <td>نوشتن Parser دوسویهٔ SCX↔JSON، Validator کلمات کلیدی Phone، نرمالایزر انکدینگ UTF-8، سیستم Pre-Shaping فارسی</td>
+          <td>Python 3.11، arabic_reshaper، python-bidi، Git</td>
+          <td class="mono">~60 ساعت</td>
+          <td>ابزار <span class="mono">sgp-toolkit</span>: دستور export/import با تست واحد (Roundtrip Test)</td>
+          <td><span class="badge b-hard">مرحله ۲</span></td>
+        </tr>
+        <tr>
+          <td class="mono">04</td><td><b>زیرساخت ترجمهٔ تیمی</b></td>
+          <td>نصب Weblate، ایمپورت رشته‌ها، ساخت واژه‌نامهٔ اجباری (نام‌ها، اصطلاحات علمی، D-Mail)، نوشتن Style Guide فارسی</td>
+          <td>Weblate، Google Sheets، Docker</td>
+          <td class="mono">~16 ساعت</td>
+          <td>پروژهٔ Weblate آنلاین + واژه‌نامهٔ v1 + Style Guide</td>
+          <td><span class="badge b-med">مرحله ۲</span></td>
+        </tr>
+        <tr>
+          <td class="mono">05</td><td><b>ترجمهٔ اصلی</b></td>
+          <td>ترجمهٔ ~۵۰هزار خط: دیالوگ‌ها، مونولوگ‌ها، ایمیل‌ها، TIPs، متون سیستمی — با Pivot انگلیسی و بازبینی دومرحله‌ای (TL→Edit)</td>
+          <td>Weblate، حافظهٔ ترجمه (TM)، جلسات هفتگی هم‌ترازی</td>
+          <td class="mono">~800–1200 ساعت (تیمی)</td>
+          <td>۱۰۰٪ رشته‌ها با وضعیت «Approved» در Weblate</td>
+          <td><span class="badge b-hard">مراحل ۳ و ۴</span></td>
+        </tr>
+        <tr>
+          <td class="mono">06</td><td><b>مهندسی فونت و RTL</b></td>
+          <td>ساخت Bitmap Font فارسی (Vazirmatn)، تزریق به system.mpk، کاهش سایز فونت، تست Pre-Shaping درون بازی، اصلاح جعبهٔ متن</td>
+          <td>FontForge، اسکریپت Atlas Generator، پایتون</td>
+          <td class="mono">~80 ساعت</td>
+          <td>بازی با متن فارسیِ خوانا و درست‌جهت در ۳ صحنهٔ نمونه (Vertical Slice)</td>
+          <td><span class="badge b-hard">مرحله ۳</span></td>
+        </tr>
+        <tr>
+          <td class="mono">07</td><td><b>بازگردانی و Repack</b></td>
+          <td>کامپایل مجدد SCXهای ترجمه‌شده، بسته‌بندی مجدد MPK، جایگزینی در پوشهٔ بازی، رفع کرش‌های اولیه</td>
+          <td>sgp-toolkit (از مرحله ۳)، MagesTool</td>
+          <td class="mono">~30 ساعت</td>
+          <td>بیلد قابل‌اجرا <span class="mono">build_fa_v0.1</span> با متن فارسی درون‌بازی</td>
+          <td><span class="badge b-med">مراحل ۵ و ۶</span></td>
+        </tr>
+        <tr>
+          <td class="mono">08</td><td><b>گرافیک و رسانه</b></td>
+          <td>فارسی‌سازی تصاویر Phone UI و منوها، زیرنویس OP/ED، طراحی لوگوی فارسی، ویرایش تصاویر TIPs مصور</td>
+          <td>GIMP، ImageMagick، FFmpeg، VGMToolbox</td>
+          <td class="mono">~60 ساعت</td>
+          <td>پوشهٔ <span class="mono">assets_fa/</span> شامل تمام تصاویر و ویدیوهای فارسی‌شده</td>
+          <td><span class="badge b-med">مرحله ۲ (موازی با ۵ قابل اجراست)</span></td>
+        </tr>
+        <tr>
+          <td class="mono">09</td><td><b>تست QA کامل</b></td>
+          <td>پلی‌تست هر ۶ پایان با Route Matrix، تست تمام Phone Triggerها، شکار سرریز متن (Overflow)، رفع باگ و ریجکشن</td>
+          <td>Route Matrix، سیوهای نقاط انشعاب، چک‌لیست QA</td>
+          <td class="mono">~120 ساعت</td>
+          <td>گزارش QA با صفر باگ Critical و لیست Known Issues جزئی</td>
+          <td><span class="badge b-med">مراحل ۷ و ۸</span></td>
+        </tr>
+        <tr>
+          <td class="mono">10</td><td><b>بسته‌بندی و انتشار</b></td>
+          <td>ساخت نصب‌کنندهٔ پچ (فایل diff روی نسخهٔ قانونی)، راهنمای نصب تصویری، صفحهٔ انتشار، انتشار عمومی رایگان</td>
+          <td>Inno Setup / xdelta، GitHub Releases</td>
+          <td class="mono">~25 ساعت</td>
+          <td><span class="mono">SteinsGate_FA_Patch_v1.0.exe</span> + مستندات نصب</td>
+          <td><span class="badge b-easy">مرحله ۹</span></td>
+        </tr>
+      </tbody>
+    </table></div>
+    <div class="note"><i class="fa-solid fa-diagram-project"></i><div>
+      <b>نکتهٔ زمان‌بندی:</b> مجموع ستون ساعت‌ها (~۱۲۴۰ ساعت) بیشتر از تقویم پروژه است چون بخش بزرگی از ترجمه (مرحلهٔ ۵) بین چند مترجم <b>موازی</b> توزیع می‌شود و مرحلهٔ ۸ هم می‌تواند هم‌زمان با ترجمه پیش برود. مسیر بحرانی (Critical Path) پروژه: <span class="mono">1 → 2 → 3 → 5 → 7 → 9 → 10</span> است.
+    </div></div>
+  </div></div>
+</section>
+
+<!-- ============================================================
+     SECTION 6 : CONCLUSION
+============================================================ -->
+<section class="acc searchable" id="sec6">
+  <div class="acc-head">
+    <span class="num">SEC-06</span>
+    <h2>نتیجه‌گیری و جمع‌بندی <span>Conclusion — وضعیت فعلی، قدم بعدی و شمارش معکوس</span></h2>
+    <i class="fa-solid fa-chevron-down chev"></i>
+  </div>
+  <div class="acc-body"><div class="acc-inner">
+
+    <h3><i class="fa-solid fa-clipboard-list"></i> جمع‌بندی وضعیت فعلی پروژه</h3>
+    <ul>
+      <li><b>موتور بازی شناسایی شد:</b> MAGES. Engine با آرشیوهای MPK و اسکریپت‌های SCX — هدف اصلی: <span class="mono">script.mpk</span> و <span class="mono">system.mpk</span>.</li>
+      <li><b>نسخهٔ هدف مشخص شد:</b> STEINS;GATE نسخهٔ اصلی PC (Steam/GOG) — نه Elite. پشتیبانی داخلی از Unicode در این نسخه، بزرگ‌ترین مانع تاریخی فن‌ترنسلیشن فارسی را حذف می‌کند.</li>
+      <li><b>ریسک‌ها سنجیده شدند:</b> سخت‌ترین چالش‌ها به ترتیب: فونت/RTL (مرحله ۶)، حجم ترجمه (مرحله ۵)، و یکپارچگی Phone Triggerها (QA مرحله ۹).</li>
+      <li><b>زیرساخت برنامه‌ریزی شد:</b> Pipeline پایتونی + Weblate + Git، با ۱۰ مرحله و مسیر بحرانی مشخص.</li>
+    </ul>
+
+    <h3><i class="fa-solid fa-forward-step"></i> پیشنهاد برای مرحلهٔ بعد (فاز ۲: استخراج متن)</h3>
+    <p>
+      در فاز ۲ این کارها را انجام می‌دهیم: (۱) اجرای MagesTool روی <span class="mono">script.mpk</span> و استخراج تمام SCXها، (۲) آزمون Roundtrip (استخراج ← بازگردانی بدون تغییر ← اجرای بازی) برای اثبات اینکه Pipeline ما «بی‌ضرر» است، (۳) تولید فایل‌های JSON دوزبانه (ژاپنی+انگلیسی) با ID یکتا برای هر رشته، (۴) آزمون چک‌سام موتور با تغییر عمدی یک بایت. خروجی این فاز، پایگاه دادهٔ کامل متن بازی است که مستقیماً وارد Weblate می‌شود.
+    </p>
+
+    <h3><i class="fa-solid fa-triangle-exclamation"></i> هشدارهای فنی مهم قبل از شروع فاز ۲</h3>
+    <div class="danger"><i class="fa-solid fa-skull-crossbones"></i><div>
+      <b>۱. هرگز روی پوشهٔ اصلی بازی کار نکنید.</b> همیشه روی کپی کار کنید (<span class="mono">STEINSGATE_WORK\</span>) و بکاپ طلایی (<span class="mono">STEINSGATE_BACKUP_CLEAN\</span>) را دست‌نخورده نگه دارید. اولین قانون مهندسی معکوس: «همیشه یک راه برگشت داشته باش».
+    </div></div>
+    <div class="warn"><i class="fa-solid fa-triangle-exclamation"></i><div>
+      <b>۲. فایل‌های SCX را با ویرایشگر متن عادی باز نکنید</b> — این فایل‌ها باینری هستند و حتی ذخیرهٔ تصادفی یک بایت، کل فصل را خراب می‌کند. فقط با ابزارهای اختصاصی کار کنید.
+    </div></div>
+    <div class="warn"><i class="fa-solid fa-triangle-exclamation"></i><div>
+      <b>۳. به <span class="mono">voice.mpk</span> و سیوها دست نزنید.</b> فایل‌های صوتی ترجمه نمی‌شوند (دوبله در این پروژه نیست) و فایل‌های سیو چک‌سام دارند؛ خراب شدنشان یعنی از دست رفتن پیشرفت بازیکنان تست.
+    </div></div>
+    <div class="warn"><i class="fa-solid fa-triangle-exclamation"></i><div>
+      <b>۴. قبل از استخراج انبوه، یک فایل نمونه را کامل دور بزنید:</b> یک SCX کوچک را استخراج، ویرایش، بازگردانی و در بازی تست کنید. اگر این چرخه کار کرد، بقیهٔ فایل‌ها هم خواهند کرد.
+    </div></div>
+
+    <h3><i class="fa-solid fa-hourglass-half"></i> شمارش معکوس شروع رسمی فاز ۲</h3>
+    <p style="text-align:center;color:var(--muted)">زمان باقی‌مانده تا استخراج رسمی متون (مهلت آماده‌سازی تیم و نصب ابزارها — ۷ روز از امروز):</p>
+    <div class="countdown" id="countdown">
+      <div class="cd-box"><div class="v" id="cd-d">--</div><div class="l">روز</div></div>
+      <div class="cd-box"><div class="v" id="cd-h">--</div><div class="l">ساعت</div></div>
+      <div class="cd-box"><div class="v" id="cd-m">--</div><div class="l">دقیقه</div></div>
+      <div class="cd-box"><div class="v" id="cd-s">--</div><div class="l">ثانیه</div></div>
+    </div>
+    <p class="mono" id="cd-target" style="text-align:center;color:var(--muted);font-size:.75rem"></p>
+  </div></div>
+</section>
+
+<!-- ============================================================
+     SECTION 7 : REFERENCES
+============================================================ -->
+<section class="acc searchable" id="sec7">
+  <div class="acc-head">
+    <span class="num">SEC-07</span>
+    <h2>مستندات و مراجع <span>References — انجمن‌ها، ابزارها، آموزش‌ها و پروژه‌های مشابه</span></h2>
+    <i class="fa-solid fa-chevron-down chev"></i>
+  </div>
+  <div class="acc-body"><div class="acc-inner">
+
+    <h3><i class="fa-solid fa-users"></i> انجمن‌های تخصصی مهندسی معکوس و فن‌ترنسلیشن</h3>
+    <div class="grid">
+      <div class="card"><h4><i class="fa-solid fa-comments"></i> ZenHAX</h4>
+        <p>بزرگ‌ترین انجمن تخصصی فرمت‌های فایل بازی و QuickBMS. بخش «Graphic adventure / Visual novels» برای فرمت‌های MAGES. جستجو کنید.</p>
+        <a class="dl" href="https://zenhax.com/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i>zenhax.com</a></div>
+      <div class="card"><h4><i class="fa-solid fa-gamepad"></i> GBAtemp</h4>
+        <p>انجمن قدیمی مود و ترجمهٔ بازی — تردهای زیادی دربارهٔ ROM Hacking و Fan Translation رمان‌های تصویری دارد.</p>
+        <a class="dl" href="https://gbatemp.net/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i>gbatemp.net</a></div>
+      <div class="card"><h4><i class="fa-solid fa-book-open"></i> Romhacking.net</h4>
+        <p>مرجع کلاسیک آموزش ROM Hacking: مستندات Pointer Table، انکدینگ، و Font Injection — پایهٔ نظری این پروژه.</p>
+        <a class="dl" href="https://www.romhacking.net/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i>romhacking.net</a></div>
+      <div class="card"><h4><i class="fa-solid fa-brands fa-discord"></i> Discord سرور Committee of Zero</h4>
+        <p>گروهی که پچ‌های انگلیسی رسمی‌نمای Science Adventure را ساختند؛ توسعه‌دهندگان ابزارهای MAGES. همین‌جا هستند.</p>
+        <a class="dl" href="https://discord.gg/6qHFWSk2Zx" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i>discord.gg (CoZ)</a></div>
+      <div class="card"><h4><i class="fa-solid fa-brands fa-reddit"></i> r/visualnovels + r/fantranslation</h4>
+        <p>تجربه‌های تیم‌های فن‌ترنسلیشن، استخدام مترجم، و بازخورد گیری از جامعه.</p>
+        <a class="dl" href="https://www.reddit.com/r/visualnovels/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i>reddit.com/r/visualnovels</a></div>
+      <div class="card"><h4><i class="fa-solid fa-torii-gate"></i> FuwaNovel / Fuwanovel Forums</h4>
+        <p>قدیمی‌ترین انجمن انگلیسی‌زبان رمان‌های تصویری — آرشیو تردهای ابزارسازی و ترجمه.</p>
+        <a class="dl" href="https://forums.fuwanovel.net/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i>forums.fuwanovel.net</a></div>
+    </div>
+
+    <h3><i class="fa-solid fa-screwdriver-wrench"></i> مخازن ابزارهای استخراج (مستقیم از سورس)</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>ابزار</th><th>کاربرد در این پروژه</th><th>لینک</th></tr></thead>
+      <tbody>
+        <tr><td><b>CommitteeOfZero / sci-adv</b> (MagesTool و ابزارهای اسکریپت)</td><td>استخراج/بازگردانی MPK و SCX — ابزار اصلی فاز ۲ و ۷</td><td><a href="https://github.com/CommitteeOfZero" target="_blank" rel="noopener">github.com/CommitteeOfZero</a></td></tr>
+        <tr><td><b>GARbro</b></td><td>استخراج آرشیوهای XP3 و صدها فرمت دیگر — ابزار کمکی و کراس‌چک</td><td><a href="https://github.com/morkt/GARbro" target="_blank" rel="noopener">github.com/morkt/GARbro</a></td></tr>
+        <tr><td><b>KrkrExtract</b></td><td>فقط برای نسخه‌های مبتنی بر KiriKiri (فان‌دیسک‌ها/نسخهٔ ۲۰۰۸)</td><td><a href="https://github.com/xmoezzz/KrkrExtract" target="_blank" rel="noopener">github.com/xmoezzz/KrkrExtract</a></td></tr>
+        <tr><td><b>ArcExtractor / arc_unpacker</b></td><td>استخراج‌کنندهٔ چندفرمتهٔ دیگر — اگر GARbro فرمتی را نشناخت</td><td><a href="https://github.com/vn-tools/arc_unpacker" target="_blank" rel="noopener">github.com/vn-tools/arc_unpacker</a></td></tr>
+        <tr><td><b>QuickBMS</b></td><td>اجرای اسکریپت‌های BMS برای فرمت‌های ناشناخته</td><td><a href="https://aluigi.altervista.org/quickbms.htm" target="_blank" rel="noopener">aluigi.altervista.org/quickbms</a></td></tr>
+        <tr><td><b>VGMToolbox</b></td><td>باز کردن ویدیوهای USM (CRI Sofdec) برای زیرنویس OP/ED</td><td><a href="https://sourceforge.net/projects/vgmtoolbox/" target="_blank" rel="noopener">sourceforge.net/projects/vgmtoolbox</a></td></tr>
+      </tbody>
+    </table></div>
+
+    <h3><i class="fa-solid fa-brands fa-youtube"></i> آموزش‌های ویدیویی پیشنهادی (YouTube)</h3>
+    <ul>
+      <li><a href="https://www.youtube.com/results?search_query=GARbro+extract+visual+novel+tutorial" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> جستجو: «GARbro extract visual novel tutorial»</a> — آموزش تصویری استخراج آرشیو با GARbro.</li>
+      <li><a href="https://www.youtube.com/results?search_query=QuickBMS+tutorial+extract+game+files" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> جستجو: «QuickBMS tutorial extract game files»</a> — کار با اسکریپت‌های BMS.</li>
+      <li><a href="https://www.youtube.com/results?search_query=visual+novel+fan+translation+tutorial+romhacking" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> جستجو: «visual novel fan translation tutorial»</a> — نمای کلی چرخهٔ فن‌ترنسلیشن.</li>
+      <li><a href="https://www.youtube.com/results?search_query=010+editor+binary+templates+tutorial" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> جستجو: «010 Editor binary templates tutorial»</a> — تحلیل ساختار باینری با قالب.</li>
+      <li><a href="https://www.youtube.com/results?search_query=arabic+reshaper+python+game+localization+RTL" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> جستجو: «game localization Arabic RTL shaping»</a> — تجربه‌های فارسی/عربی‌سازی موتورهای LTR.</li>
+    </ul>
+
+    <h3><i class="fa-solid fa-code-compare"></i> پروژه‌های مشابه (الگوهای موفق روی بازی‌های MAGES.)</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>پروژه</th><th>بازی / زبان</th><th>درس آموخته برای ما</th><th>لینک</th></tr></thead>
+      <tbody>
+        <tr><td><b>Committee of Zero — S;G 0 English Improvement Patch</b></td><td>STEINS;GATE 0 / انگلیسی</td><td>معماری ابزار MPK/SCX، روش تزریق فونت، ساختار پچ روی نسخهٔ Steam</td><td><a href="http://sonome.dareno.me/projects/sg0-steam.html" target="_blank" rel="noopener">sonome.dareno.me/projects/sg0</a></td></tr>
+        <tr><td><b>CoZ — CHAOS;HEAD NOAH English Patch</b></td><td>CHAOS;HEAD / انگلیسی</td><td>ترجمهٔ کامل روی همان موتور؛ الگوی مدیریت TIPs و رشته‌های سیستمی</td><td><a href="https://sonome.dareno.me/projects/chn-patch.html" target="_blank" rel="noopener">sonome.dareno.me/projects/chn</a></td></tr>
+        <tr><td><b>ترجمه‌های اسپانیایی/روسی SciADV</b></td><td>Steins;Gate / اسپانیایی، روسی</td><td>اثبات اینکه متن طولانی‌تر از ژاپنی (مثل روسی) با فونت‌کوچک‌سازی قابل جا شدن است</td><td><a href="https://steamcommunity.com/app/412830/discussions/" target="_blank" rel="noopener">Steam Discussions — S;G</a></td></tr>
+        <tr><td><b>پروژه‌های عربی‌سازی VN (مثل عربی‌سازی CLANNAD)</b></td><td>رمان‌های تصویری / عربی</td><td>تکنیک Pre-Shaping + Bidi روی موتورهای LTR — دقیقاً راه‌حل چالش ۳ ما</td><td><a href="https://github.com/mpcabd/python-arabic-reshaper" target="_blank" rel="noopener">github.com/mpcabd/python-arabic-reshaper</a></td></tr>
+        <tr><td><b>مستندات فرمت MAGES. در ویکی‌های فن</b></td><td>—</td><td>توضیح ساختار Header فایل MPK و تگ‌های اسکریپت SCX</td><td><a href="https://github.com/CommitteeOfZero?tab=repositories" target="_blank" rel="noopener">github.com/CommitteeOfZero — Repos</a></td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="tip"><i class="fa-solid fa-bookmark"></i><div>
+      <b>پیشنهاد:</b> قبل از شروع فاز ۲، مخزن <a href="https://github.com/CommitteeOfZero" target="_blank" rel="noopener">CommitteeOfZero</a> را Fork کنید و مستندات فرمت SCX را مطالعه کنید — ۸۰٪ کار مهندسی معکوس این پروژه را آن‌ها قبلاً انجام داده‌اند؛ ما فقط فارسی را به چرخه اضافه می‌کنیم.
+    </div></div>
+  </div></div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="searchable">
+  <div class="pdf-row">
+    <button class="btn big" onclick="this.innerHTML='<i class=&quot;fa-solid fa-circle-notch fa-spin&quot;></i> در حال تولید گزارش... (نمایشی)';setTimeout(()=>this.innerHTML='<i class=&quot;fa-solid fa-file-pdf&quot;></i> گزارش PDF (به‌زودی)',1800)">
+      <i class="fa-solid fa-file-pdf"></i> دانلود گزارش PDF فاز ۱
+    </button>
+  </div>
+  <div style="display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:.8rem;color:var(--muted)">
+    <span><i class="fa-solid fa-flask" style="color:var(--neon)"></i> Steins;Gate Persian Project</span>
+    <span class="mono">PHASE 01/10 — COMPLETE</span>
+    <span class="mono">Divergence Meter: 1.048596</span>
+    <span><i class="fa-solid fa-heart" style="color:var(--red)"></i> ساخته‌شده با احترام به MAGES. و جامعهٔ فن‌ترنسلیشن</span>
+  </div>
+  <small>این سند یک پروژهٔ غیرتجاری فن‌ترنسلیشن است. Steins;Gate متعلق به MAGES. / Nitroplus است. پچ نهایی هیچ فایل اصلی بازی را توزیع نمی‌کند و به نسخهٔ قانونی نیاز دارد. — El Psy Kongroo.</small>
+</footer>
+
+<button id="toTop" title="بازگشت به بالا" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script>
+/* ===== Accordion ===== */
+document.querySelectorAll('.acc-head').forEach(function(h){
+  h.addEventListener('click',function(){ h.parentElement.classList.toggle('open'); });
+});
+
+/* ===== Live Search ===== */
+(function(){
+  var input=document.getElementById('searchInput');
+  var items=document.querySelectorAll('.searchable');
+  var marks=[];
+  function clearMarks(){
+    marks.forEach(function(m){
+      var p=m.parentNode;
+      if(p){p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();}
+    });
+    marks=[];
+  }
+  input.addEventListener('input',function(){
+    var q=input.value.trim();
+    clearMarks();
+    if(q.length<2){
+      items.forEach(function(el){el.classList.remove('hidden-by-search');});
+      return;
+    }
+    var ql=q.toLowerCase();
+    items.forEach(function(el){
+      var txt=(el.textContent||'').toLowerCase();
+      if(txt.indexOf(ql)!==-1){
+        el.classList.remove('hidden-by-search');
+        if(el.classList.contains('acc')) el.classList.add('open');
+      }else{
+        el.classList.add('hidden-by-search');
+      }
+    });
+    /* highlight inside visible sections */
+    items.forEach(function(el){
+      if(el.classList.contains('hidden-by-search'))return;
+      var walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,{
+        acceptNode:function(n){
+          if(!n.nodeValue||n.nodeValue.toLowerCase().indexOf(ql)===-1)return NodeFilter.FILTER_REJECT;
+          var tag=n.parentNode.nodeName.toLowerCase();
+          if(tag==='script'||tag==='style'||tag==='mark'||tag==='input')return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      var nodes=[];
+      while(walker.nextNode())nodes.push(walker.currentNode);
+      nodes.forEach(function(n){
+        var val=n.nodeValue, lower=val.toLowerCase(), idx=lower.indexOf(ql);
+        var frag=document.createDocumentFragment(), pos=0;
+        while(idx!==-1){
+          frag.appendChild(document.createTextNode(val.slice(pos,idx)));
+          var mk=document.createElement('mark');
+          mk.textContent=val.slice(idx,idx+q.length);
+          frag.appendChild(mk);marks.push(mk);
+          pos=idx+q.length;
+          idx=lower.indexOf(ql,pos);
+        }
+        frag.appendChild(document.createTextNode(val.slice(pos)));
+        n.parentNode.replaceChild(frag,n);
+      });
+    });
+  });
+})();
+
+/* ===== Countdown to Phase 2 (7 days from first visit; persists in localStorage) ===== */
+(function(){
+  var KEY='sgp_phase2_deadline';
+  var target=parseInt(localStorage.getItem(KEY)||'0',10);
+  if(!target||target<Date.now()){
+    target=Date.now()+7*24*60*60*1000;
+    try{localStorage.setItem(KEY,String(target));}catch(e){}
+  }
+  document.getElementById('cd-target').textContent=
+    'Phase 2 Launch: '+new Date(target).toLocaleString('fa-IR');
+  function tick(){
+    var diff=Math.max(0,target-Date.now());
+    var d=Math.floor(diff/86400000),
+        h=Math.floor(diff%86400000/3600000),
+        m=Math.floor(diff%3600000/60000),
+        s=Math.floor(diff%60000/1000);
+    document.getElementById('cd-d').textContent=String(d).padStart(2,'0');
+    document.getElementById('cd-h').textContent=String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent=String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent=String(s).padStart(2,'0');
+  }
+  tick();setInterval(tick,1000);
+})();
+
+/* ===== Back to top ===== */
+(function(){
+  var btn=document.getElementById('toTop');
+  window.addEventListener('scroll',function(){
+    btn.classList.toggle('show',window.scrollY>600);
+  });
+})();
+</script>
+</body>
+</html>
