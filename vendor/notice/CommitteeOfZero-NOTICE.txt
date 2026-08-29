@@ -1,0 +1,23 @@
+Third-Party Attribution
+========================
+
+The MPK extraction logic in this project (tools/mgstool.py) is a faithful
+reimplementation of the MPK ("Mages Package") container reader published by
+Committee of Zero in their "SciAdv.Net" tools repository:
+
+    Repository : https://github.com/CommitteeOfZero/SciAdv.Net
+    Components : src/SciAdvNet.MagesVfs/MagesArchive.cs
+                 src/SciAdvNet.MagesVfs/MpkFileEntry.cs
+                 src/Tools/Ungelify/Program.cs (extract-all semantics)
+
+Committee of Zero's tooling is used here under its published open-source
+terms for the purposes of this non-commercial fan translation project
+("Steins;Gate Persian Localization"), to extract text/script data the user
+legally owns from the game archives.
+
+The tests/fixtures/*.mpk files are the official test archives distributed in
+the same upstream repository (tests/SciAdvNet.MagesVfs.Tests/Data/) and are
+included solely to validate the local reimplementation.
+
+STEINS;GATE is (c) MAGES. / Nitroplus. This project does not distribute any
+original game files; it only processes a legally obtained copy.
