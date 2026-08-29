@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "jp": "キーワード",
+    "en": "keyword",
+    "max_chars": 10,
+    "context": "Phone Trigger — generic keyword prompt",
+    "route": "true_end",
+    "character": "system"
+  },
+  {
+    "id": 2,
+    "jp": "返信",
+    "en": "reply",
+    "max_chars": 8,
+    "context": "D-Mail reply button",
+    "route": "all",
+    "character": "system"
+  }
+]

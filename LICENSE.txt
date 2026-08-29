@@ -1,0 +1,23 @@
+# Steins;Gate Persian Fan Translation Patch — Legal Notice
+
+This is a **non-commercial fan translation patch** created by enthusiasts for the Persian-speaking community.
+
+## Terms
+
+1. **Ownership:** Steins;Gate and all its assets are property of MAGES. (formerly 5pb.) / Nitroplus. We claim no ownership.
+
+2. **No Game Files:** This patch contains ONLY translated text files, modified font files, and translated UI images. It does NOT contain any original game assets, executables, audio, video, or data files.
+
+3. **Legal Copy Required:** Users must own a legitimate, purchased copy of STEINS;GATE (Steam or GOG) to use this patch. The patch will not function without the original game.
+
+4. **Non-Commercial:** This patch is distributed free of charge. It may not be sold, bundled with paid products, or used for commercial purposes.
+
+5. **No Warranty:** This patch is provided "as is" without any warranty. The authors are not responsible for any damage to game installations or save data.
+
+6. **Distribution:** This patch may be freely distributed, provided this license notice is included and no fee is charged.
+
+7. **Respect the Creators:** If you enjoy Steins;Gate, please support MAGES. by purchasing their games.
+
+---
+
+*El Psy Kongroo*

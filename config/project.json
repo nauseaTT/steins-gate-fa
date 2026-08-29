@@ -1,0 +1,17 @@
+{
+  "game_root": "D:/Games/STEINSGATE",
+  "backup_root": "D:/Games/STEINSGATE_BACKUP_CLEAN",
+  "work_root": "D:/Games/STEINSGATE_WORK",
+  "extracted_dir": "extracted",
+  "strings_dir": "extracted/strings",
+  "assets_fa_dir": "assets_fa",
+  "source_encoding": "shift_jis",
+  "target_encoding": "utf-8",
+  "target_language": "fa",
+  "font_size_dialog": 26,
+  "font_size_default": 32,
+  "font_name": "Vazirmatn",
+  "max_expansion_ratio": 1.5,
+  "glossary_path": "docs/GLOSSARY.md",
+  "style_guide_path": "docs/STYLE_GUIDE.md"
+}

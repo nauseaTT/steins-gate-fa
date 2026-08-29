@@ -1,0 +1,10 @@
+{
+  "source_font": "Vazirmatn",
+  "source_font_path": "assets/Vazirmatn-Regular.ttf",
+  "atlas_output_dir": "assets_fa/font/",
+  "glyph_size": 32,
+  "glyph_padding": 2,
+  "atlas_texture_size": 1024,
+  "font_name_in_game": "vazirmatn_fa",
+  "replace_original": false
+}

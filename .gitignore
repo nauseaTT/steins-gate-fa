@@ -1,0 +1,36 @@
+# Extracted game files (not for distribution)
+extracted/
+*.mpk
+*.scx
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Font temp files
+assets_fa/font/temp_glyphs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large font files
+*.ttf
+*.otf
+
+# Game backups
+*_BACKUP*/
+*_WORK*/
+
+# Save files
+*.dat
