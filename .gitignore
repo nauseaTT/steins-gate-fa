@@ -1,0 +1,14 @@
+# Local reference clone of upstream tool source (not part of this project's code)
+.upstream/
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db

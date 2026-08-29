@@ -1,0 +1,35 @@
+{
+  "project": "Steins;Gate Persian Localization",
+  "phase": "02/10 — Extract text files from game archives",
+  "tool": {
+    "name": "MagesTool",
+    "origin": "CommitteeOfZero / SciAdv.Net (ungelify + SciAdvNet.MagesVfs)",
+    "upstream": "https://github.com/CommitteeOfZero/SciAdv.Net",
+    "implementation": "tools/mgstool.py"
+  },
+  "generated_utc": "2026-08-29T15:05:01.616326+00:00",
+  "game_root": "/home/user/webapp",
+  "source_archives": {
+    "script.mpk": null,
+    "system.mpk": null
+  },
+  "outputs": {
+    "scripts_raw": {
+      "directory": "/home/user/webapp/extracted/scripts_raw",
+      "file_count": 0,
+      "scx_file_count": 0,
+      "files": []
+    },
+    "system_texts": {
+      "directory": "/home/user/webapp/extracted/system_texts",
+      "file_count": 0,
+      "files": []
+    },
+    "system_fonts": {
+      "directory": "/home/user/webapp/extracted/system_fonts",
+      "file_count": 0,
+      "files": []
+    }
+  },
+  "total_scx_files": 0
+}
